@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% set shown_status = status_code|default(status|default('!')) %}
+{% set status_titles = {400:'Request could not be processed',403:'Access denied to this page',404:'Page not found',405:'Method not supported',413:'Submitted content too large',500:'Service temporarily unavailable'} %}
+{% set status_messages = {400:'The submitted request could not be processed securely; please check your input and try again.',403:'This learning space does not have permission to access this content.',404:'The requested page was not found; it may have moved, or this record does not belong to the current learning space.',405:'This page does not accept this method of operation; please re-enter via a button or link on the page.',413:'Submitted content exceeds the size allowed by the system; please remove unnecessary content and try again.',500:'The server could not complete the request; error details are hidden to avoid exposing learner data.'} %}
+{% set shown_title = error_title|default(title|default(status_titles.get(shown_status, 'Operation temporarily unavailable'))) %}
+{% set supplied_message = error_message|default(message|default('')) %}
+{% set shown_message = status_messages.get(shown_status) if (not supplied_message or supplied_message.startswith('The ')) and shown_status in status_messages else (supplied_message or 'The request could not be completed securely. Your saved mainline state will not be modified by this page.') %}
+
+{% block title %}{{ shown_title }} | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell error-page">
+    <div class="error-page__code" aria-hidden="true">{{ shown_status }}</div>
+    <div>
+      <p class="eyebrow">System Notice</p>
+      <h1>{{ shown_title }}</h1>
+      <p class="lede">{{ shown_message }}</p>
+      {% if recovery_steps %}
+        <h2>You can try</h2>
+        <ul>
+          {% for step in recovery_steps %}<li>{{ step }}</li>{% endfor %}
+        </ul>
+      {% else %}
+        <ul>
+          <li>Go back to the previous page to check your input, then submit again.</li>
+          <li>If the LLM API is temporarily unavailable, please try again later; the system will not fake a successful response with static results.</li>
+          <li>If the issue persists, provide the request ID below to the system maintainer; do not send access codes or personal profiles.</li>
+        </ul>
+      {% endif %}
+      {% if request_id %}<p class="request-id">Request ID: <code>{{ request_id }}</code></p>{% endif %}
+      <div class="button-row button-row--start">
+        <a class="button" href="{{ back_url|default(url_for('home')) }}">{{ back_label|default('Return to safe page') }}</a>
+        <a class="button button--secondary" href="{{ url_for('transparency') }}#limitations">View system boundaries</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

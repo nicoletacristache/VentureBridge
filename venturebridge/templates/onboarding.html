@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field, field_error with context %}
+{% set form = form if form is defined else (request.form if request is defined and request.method == 'POST' else {}) %}
+
+{% block title %}Build Learner Profile | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Step 1 / 3</p>
+        <h1>Tell the system where you want to start from</h1>
+        <p class="lede">Provide information related to entrepreneurial learning that you are willing to share. Please remove identity information such as name, full organization name, contact details, etc.</p>
+      </div>
+      <div class="privacy-card">
+        <strong>Privacy Check Before Submission</strong>
+        <ul>
+          <li>Do not fill in name, student ID, phone number, email, address</li>
+          <li>Do not paste complete materials containing others' identity information</li>
+          <li>Only describe experiences and constraints related to learning goals</li>
+        </ul>
+      </div>
+    </header>
+
+    <aside class="notice" id="profile-minimum-help" aria-label="Profile Filling Requirements">
+      <strong>Fill as needed, no need to over-disclose</strong>
+      <p>Learning stage and major can be left blank; at least one of learning goals, experience, skills, interests, available resources must be filled. Entrepreneurial experience and MBTI can also be left blank.</p>
+    </aside>
+
+    <form method="post" action="{{ url_for('onboarding') }}" class="long-form" data-profile-form>
+      {{ csrf_field() }}
+      <section class="form-section" aria-labelledby="background-title">
+        <div class="form-section__intro">
+          <span class="step-chip">01</span>
+          <div>
+            <h2 id="background-title">Background and Learning Goals</h2>
+            <p>This information helps adjust case context and is not used to judge identity or real-world startup success rate.</p>
+          </div>
+        </div>
+        <div class="field-grid field-grid--2">
+          <div class="field">
+            <label for="education-stage">Current Learning Stage (Optional)</label>
+            <select id="education-stage" name="education_stage" aria-describedby="education-stage-help">
+              <option value="">Please Select</option>
+              {% for value, label in [('vocational','Vocational Education'), ('undergraduate','Undergraduate'), ('postgraduate','Postgraduate'), ('continuing','Continuing Education/Training'), ('other','Other')] %}
+                <option value="{{ value }}" {% if form is defined and form.education_stage == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+            <p class="field-help" id="education-stage-help">Select the closest stage.</p>
+            {{ field_error('education_stage') }}
+          </div>
+          <div class="field">
+            <label for="discipline">Major or Primary Field of Study (Optional)</label>
+            <input id="discipline" name="discipline" type="text" maxlength="100"
+                   value="{{ form.discipline|default('') if form is defined else '' }}"
+                   placeholder="e.g.: Mechanical Engineering, Journalism & Communication, Nursing">
+            {{ field_error('discipline') }}
+          </div>
+        </div>
+        <div class="field">
+          <label for="learning-goals">What do you hope to practice this time?</label>
+          <textarea id="learning-goals" name="learning_goals" rows="4" maxlength="1200"
+                    data-char-count data-profile-signal aria-describedby="profile-minimum-help learning-goals-help learning-goals-count">{{ form.learning_goals|default('') if form is defined else '' }}</textarea>
+          <div class="field-meta">
+            <p class="field-help" id="learning-goals-help">E.g.: Validating demand, cash flow decisions, team collaboration, or dealing with uncertainty.</p>
+            <span id="learning-goals-count" class="char-count" aria-live="polite"></span>
+          </div>
+          {{ field_error('learning_goals') }}
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="experience-title">
+        <div class="form-section__intro">
+          <span class="step-chip">02</span>
+          <div>
+            <h2 id="experience-title">Experience, Skills, and Interests</h2>
+            <p>Please summarize facts; uploading resumes or proof documents is not required.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="experience-text">Learning, Work, or Project Experience</label>
+          <textarea id="experience-text" name="experience_text" rows="6" maxlength="2400"
+                    data-char-count data-profile-signal aria-describedby="profile-minimum-help experience-help experience-count">{{ form.experience_text|default('') if form is defined else '' }}</textarea>
+          <div class="field-meta">
+            <p class="field-help" id="experience-help">You may write about tasks undertaken, problems faced, and choices made; please remove real names of organizations and individuals.</p>
+            <span id="experience-count" class="char-count" aria-live="polite"></span>
+          </div>
+          {{ field_error('experience_text') }}
+        </div>
+        <div class="field-grid field-grid--2">
+          <div class="field">
+            <label for="skills-text">Skills and Available Knowledge</label>
+            <textarea id="skills-text" name="skills_text" rows="4" maxlength="1200"
+                      data-char-count data-profile-signal aria-describedby="profile-minimum-help skills-count">{{ form.skills_text|default('') if form is defined else '' }}</textarea>
+            <span id="skills-count" class="char-count" aria-live="polite"></span>
+            {{ field_error('skills_text') }}
+          </div>
+          <div class="field">
+            <label for="interests-text">Interests and Questions Willing to Explore</label>
+            <textarea id="interests-text" name="interests_text" rows="4" maxlength="1200"
+                      data-char-count data-profile-signal aria-describedby="profile-minimum-help interests-count">{{ form.interests_text|default('') if form is defined else '' }}</textarea>
+            <span id="interests-count" class="char-count" aria-live="polite"></span>
+            {{ field_error('interests_text') }}
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="conditions-title">
+        <div class="form-section__intro">
+          <span class="step-chip">03</span>
+          <div>
+            <h2 id="conditions-title">Resources, Constraints, and Existing Entrepreneurial Experience</h2>
+            <p>Resources can be time, accessible people, or equipment; there is no need to fill in sensitive information such as asset amounts.</p>
+          </div>
+        </div>
+        <div class="field-grid field-grid--2">
+          <div class="field">
+            <label for="resources-text">Available Resources and Real-world Constraints</label>
+            <textarea id="resources-text" name="resources_text" rows="5" maxlength="1600"
+                      data-char-count data-profile-signal aria-describedby="profile-minimum-help resources-count">{{ form.resources_text|default('') if form is defined else '' }}</textarea>
+            <span id="resources-count" class="char-count" aria-live="polite"></span>
+            {{ field_error('resources_text') }}
+          </div>
+          <div class="field">
+            <label for="entrepreneurship-experience">Entrepreneurial, Competition, or User Research Experience</label>
+            <textarea id="entrepreneurship-experience" name="entrepreneurship_experience" rows="5" maxlength="1600"
+                      data-char-count aria-describedby="entrepreneurship-experience-help entrepreneurship-experience-count">{{ form.entrepreneurship_experience|default('') if form is defined else '' }}</textarea>
+            <div class="field-meta">
+              <p class="field-help" id="entrepreneurship-experience-help">Leave blank if none; no need to write 'None yet'.</p>
+              <span id="entrepreneurship-experience-count" class="char-count" aria-live="polite"></span>
+            </div>
+            {{ field_error('entrepreneurship_experience') }}
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section form-section--optional" aria-labelledby="mbti-title">
+        <div class="form-section__intro">
+          <span class="step-chip step-chip--optional">Optional</span>
+          <div>
+            <h2 id="mbti-title">MBTI Self-Preference Clues</h2>
+            <p><strong>Low weight, modifiable, optional.</strong>It is not a true personality value and will not independently determine recommendation or training paths.</p>
+          </div>
+        </div>
+        <label class="switch-field">
+          <input type="checkbox" name="include_mbti" value="yes" data-toggle-region="mbti-fields"
+                 {% if form is defined and form.include_mbti %}checked{% endif %}>
+          <span>I am willing to use my current self-reported MBTI as a low-weight clue</span>
+        </label>
+        <div id="mbti-fields" class="toggle-region" {% if not (form is defined and form.include_mbti) %}hidden{% endif %}>
+          <div class="field-grid field-grid--2">
+            <div class="field">
+              <label for="mbti-type">Current Self-Reported Type</label>
+              <select id="mbti-type" name="mbti_type">
+                <option value="">Uncertain / Do Not Fill</option>
+                {% for type in ['ISTJ','ISFJ','INFJ','INTJ','ISTP','ISFP','INFP','INTP','ESTP','ESFP','ENFP','ENTP','ESTJ','ESFJ','ENFJ','ENTJ'] %}
+                  <option value="{{ type }}" {% if form is defined and form.mbti_type == type %}selected{% endif %}>{{ type }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="mbti-note">Uncertainty or Self-Supplement</label>
+              <input id="mbti-note" name="mbti_note" type="text" maxlength="300"
+                     value="{{ form.mbti_note|default('') if form is defined else '' }}"
+                     placeholder="e.g.: Test results may vary; I only agree with some descriptions">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="notice" aria-labelledby="processing-note-title">
+        <h2 id="processing-note-title">What Happens After Submission</h2>
+        <p>The backend will first perform data minimization, then extract a profile draft with original text evidence, confidence scores, and conflict markers via the configured LLM API. You need to confirm or correct on the next page; the profile will not automatically become an immutable tag.</p>
+      </aside>
+
+      <div class="form-actions form-actions--sticky">
+        <p>Clicking 'Generate Profile Draft' indicates you confirm the text does not contain unnecessary identity information.</p>
+        <button class="button button--large" type="submit" data-submit-label="Generating Profile Draft...">Generate Profile Draft</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

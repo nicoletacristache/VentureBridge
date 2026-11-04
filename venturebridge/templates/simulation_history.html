@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import anchor_badge, process_notice with context %}
+{% set ecd_labels = {'opportunity_evaluation':'Opportunity Definition and Evaluation','opportunity_framing':'Opportunity Definition and Evaluation','evidence_falsifiability':'Evidence Weighting and Falsifiability','resource_financial_allocation':'Resource and Financial Allocation','resource_finance':'Resource and Financial Allocation','uncertainty_adaptation':'Action Planning and Adaptation Under Uncertainty','adaptive_action':'Action Planning and Adaptation Under Uncertainty','stakeholder_ethics_compliance':'Team, Stakeholders, and Ethical Compliance','stakeholder_ethics':'Team, Stakeholders, and Ethical Compliance'} %}
+{% set simulation_state_labels = {'cash':'Cash','team':'Team','product':'Product','market_evidence':'Market Evidence','reputation':'Reputation','compliance':'Compliance'} %}
+{% set mapping_level_labels = {'low':'Low','medium':'Medium','high':'High'} %}
+{% set safety_flag_labels = {'none':'No specific risk flag returned (does not mean proven safe)','financial_advice_risk':'Potential risk of real-world financial advice','legal_advice_risk':'Potential risk of real-world legal advice','privacy_risk':'Potential privacy risk','self_harm_or_violence':'Potential risk of self-harm or violence','discrimination_risk':'Potential discrimination risk','prompt_injection':'Possible prompt injection detected','other':'Other risks requiring manual review'} %}
+
+{% block title %}Decision and State History | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header page-header--single">
+      <div>
+        <p class="eyebrow">Audit Trail</p>
+        <h1>Decision and State History</h1>
+        <p class="lede">This displays events, responses, rule state transitions, and process evidence encoding actually saved by the system; missing events are not fabricated, nor is feedback rewritten as experimental results.</p>
+      </div>
+    </header>
+
+    {{ process_notice() }}
+
+    <div class="history-toolbar">
+      <p>Total {{ history|length if history else 0 }} event records</p>
+      <a class="button button--secondary" href="{{ url_for('simulation_dashboard') }}">Return to Simulation Overview</a>
+    </div>
+
+    {% if history %}
+      <ol class="timeline history-timeline">
+        {% for item in history %}
+          {% set event_record = item.get('event', item) %}
+          {% set event_container = event_record.get('event_json', {}) %}
+          {% set domain_event = event_container.get('domain_event', event_record.get('domain_event', {})) %}
+          {% set event = event_record.get('content', event_container.get('content', event_container if event_container else event_record)) %}
+          {% set response = item.get('response', item if item.get('response_id') else {}) %}
+          {% set response_feedback = response.get('feedback', response.get('feedback_json')) %}
+          {% set feedback = response_feedback if response_feedback is mapping else {} %}
+          {% set mapping_uncertainty = feedback.get('mapping_uncertainty', {}) %}
+          {% set safety_flags = feedback.get('safety_flags', []) %}
+          {% set transition_feedback = feedback.get('transition', {}) %}
+          {% set raw_response_evidence = response.get('evidence', response.get('evidence_json', response.get('evidence_dimensions', {}))) %}
+          {% set response_evidence = raw_response_evidence.get('evidence', raw_response_evidence) if raw_response_evidence is mapping else raw_response_evidence %}
+          <li>
+            <div class="timeline__marker" aria-hidden="true">{{ event_record.get('turn_no', event.get('turn_no', loop.index)) }}</div>
+            <article class="history-card">
+              <header class="history-card__header">
+                <div>
+                  <div class="timeline__topline">
+                    {{ anchor_badge(event_record.get('event_kind', event.get('event_kind', 'main'))) }}
+                    {% if event_record.get('created_at', event.get('created_at')) %}<time datetime="{{ event_record.get('created_at', event.get('created_at')) }}">{{ event_record.get('created_at', event.get('created_at')) }}</time>{% endif %}
+                  </div>
+                  <h2>{{ event.get('title', 'Entrepreneurial Decision Event') }}</h2>
+                </div>
+                {% if event_record.get('status', event.get('status')) %}{% set event_status = event_record.get('status', event.get('status')) %}<span class="status-badge">{{ {'completed':'Completed','pending':'Pending','cancelled':'Cancelled'}.get(event_status, event_status) }}</span>{% endif %}
+              </header>
+
+              {% set event_summary = event.get('summary', event.get('narrative', event.get('situation'))) %}
+              {% if event_summary %}<p class="history-card__summary">{{ event_summary }}</p>{% endif %}
+
+              {% if response %}
+                <div class="response-summary">
+                  {% if response.get('decision_text') %}<section><h3>Your Decision</h3><p>{{ response.get('decision_text') }}</p></section>{% endif %}
+                  {% if response.get('rationale_text') %}<section><h3>Rationale</h3><p>{{ response.get('rationale_text') }}</p></section>{% endif %}
+                  {% if response.get('information_requests') %}
+                    <section><h3>Information Requested</h3><p>{{ response.get('information_requests') }}</p></section>
+                  {% endif %}
+                  {% if response.get('revision_text') %}
+                    <section><h3>Revision Conditions</h3><p>{{ response.get('revision_text') }}</p></section>
+                  {% endif %}
+                  {% if response.get('action_code') %}
+                    {% set selected_action = namespace(label='') %}
+                    {% for action in domain_event.get('allowed_actions', []) %}
+                      {% if action is mapping and action.get('action_code') == response.get('action_code') %}{% set selected_action.label = action.get('label', '') %}{% endif %}
+                    {% endfor %}
+                    <section><h3>Action Adopted by Rule Engine</h3><p>{% if selected_action.label %}{{ selected_action.label }} · {% endif %}<code>{{ response.get('action_code') }}</code></p></section>
+                  {% endif %}
+                </div>
+
+                {% if response.get('classification_confidence') is not none or mapping_uncertainty or safety_flags or feedback.get('state_change_notice') or transition_feedback.get('feedback_cue') or feedback.get('interpretation_boundary') %}
+                  <section class="mapping-audit" aria-labelledby="mapping-audit-title-{{ loop.index }}">
+                    <h3 id="mapping-audit-title-{{ loop.index }}">Action Mapping and Rule Feedback (Uncalibrated)</h3>
+                    <p class="small muted">Open-ended responses are mapped to whitelisted action codes by the LLM. Model-reported confidence and uncertainty have not been empirically calibrated and should not be interpreted as mapping accuracy probability, competency scores, or real-world outcome predictions.</p>
+                    <dl class="mapping-audit__list">
+                      {% if response.get('classification_confidence') is not none %}
+                        <div><dt>Model-Reported Classification Confidence</dt><dd>{{ (response.get('classification_confidence') * 100)|round|int }}% (Uncalibrated, not accuracy rate)</dd></div>
+                      {% endif %}
+                      {% if mapping_uncertainty %}
+                        <div><dt>Mapping Uncertainty</dt><dd>{{ mapping_level_labels.get(mapping_uncertainty.get('level'), mapping_uncertainty.get('level', 'Not Specified')) }}</dd></div>
+                        {% if mapping_uncertainty.get('explanation') %}<div><dt>Mapping Explanation Provided by Model</dt><dd>{{ mapping_uncertainty.get('explanation') }}</dd></div>{% endif %}
+                        {% if mapping_uncertainty.get('alternative_action_codes') %}<div><dt>Possible Alternative Action Codes</dt><dd>{% for code in mapping_uncertainty.get('alternative_action_codes') %}<code>{{ code }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</dd></div>{% endif %}
+                      {% endif %}
+                      {% if safety_flags %}
+                        <div><dt>Automated Safety Flags</dt><dd>{% for flag in safety_flags %}{{ safety_flag_labels.get(flag, flag) }}{% if not loop.last %}; {% endif %}{% endfor %}</dd></div>
+                      {% endif %}
+                    </dl>
+                    {% if feedback.get('state_change_notice') %}<p><strong>State Change Boundaries:</strong> {{ feedback.get('state_change_notice') }}</p>{% endif %}
+                    {% if transition_feedback.get('feedback_cue') %}<p><strong>Rule Blueprint Feedback Cue:</strong> {{ transition_feedback.get('feedback_cue') }}</p>{% endif %}
+                    {% if feedback.get('interpretation_boundary') %}<p class="muted"><strong>Interpretation Boundary:</strong> {{ feedback.get('interpretation_boundary') }}</p>{% endif %}
+                  </section>
+                {% endif %}
+
+                {% if response_feedback %}
+                  <details class="history-details">
+                    <summary>View System-Generated Reflection Feedback</summary>
+                    {% if response_feedback is mapping %}
+                      {% if feedback.get('summary') %}<p>{{ feedback.get('summary') }}</p>{% endif %}
+                      {% if feedback.get('strengths') %}<h3>Evidence Presented in Response</h3><ul>{% for item in feedback.get('strengths') %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}
+                      {% set questions = feedback.get('reflection_questions', feedback.get('questions', [])) %}
+                      {% if questions %}<h3>Reflection Questions</h3><ul>{% for question in questions %}<li>{{ question }}</li>{% endfor %}</ul>{% endif %}
+                      {% if feedback.get('next_step') %}<p><strong>Next Step:</strong> {{ feedback.get('next_step') }}</p>{% endif %}
+                      {% if feedback.get('limitations') %}<p class="muted"><strong>Feedback Limitations:</strong> {{ feedback.get('limitations') }}</p>{% endif %}
+                      {% if feedback.get('caveat') %}<p class="muted">{{ feedback.get('caveat') }}</p>{% endif %}
+                    {% else %}<p>{{ response_feedback }}</p>{% endif %}
+                  </details>
+                {% endif %}
+
+                {% set evidence = response_evidence %}
+                {% if evidence %}
+                  <details class="history-details evidence-details">
+                    <summary>View Five-Dimensional Process Evidence Encoding (Pending Verification)</summary>
+                    <p class="small muted">These entries are automatically extracted process cues, not competency scores or conclusions.</p>
+                    <div class="dimension-grid">
+                      {% if evidence is mapping %}
+                        {% for key, dimension in evidence.items() %}
+                          <article>
+                            <h3>{{ dimension.get('label', ecd_labels.get(key, key)) if dimension is mapping else ecd_labels.get(key, key) }}</h3>
+                            <p>{{ dimension.get('evidence', dimension.get('note', 'No clear evidence extracted')) if dimension is mapping else dimension }}</p>
+                          </article>
+                        {% endfor %}
+                      {% else %}
+                        {% for dimension in evidence %}
+                          <article>
+                            {% set dimension_key = dimension.get('dimension', '') if dimension is mapping else '' %}
+                            <h3>{{ dimension.get('label', ecd_labels.get(dimension_key, dimension_key or 'Process Dimension')) if dimension is mapping else 'Process Dimension' }}</h3>
+                            {% if dimension is mapping and dimension.get('score') is not none %}<p class="evidence-code">Text Evidence Encoding: {{ dimension.get('score') }} / 4 (Pending Verification)</p>{% endif %}
+                            <p>{{ dimension.get('evidence', dimension.get('rationale', dimension.get('note', 'No clear evidence extracted'))) if dimension is mapping else dimension }}</p>
+                            {% if dimension is mapping and dimension.get('quotes') %}<blockquote>"{{ dimension.get('quotes')|join('" "') }}"</blockquote>{% endif %}
+                          </article>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </details>
+                {% endif %}
+
+                {% if event_record.get('event_kind', event.get('event_kind')) in ['exact_anchor', 'surface_anchor'] %}
+                  <p class="restore-line"><strong>Mainline Restoration:</strong> {{ item.get('restore_note', 'This anchor event was completed in an isolated state; the personalized mainline continues from the pre-entry state.') }}</p>
+                  {% set sandbox_before = response.get('visible_state_json', domain_event.get('visible_state', {})) %}
+                  {% set sandbox_after = response.get('sandbox_state_after_json', transition_feedback.get('sandbox_state_after', {})) %}
+                  {% if sandbox_before and sandbox_after %}
+                    <details class="history-details">
+                      <summary>View Anchor Event Sandbox State Changes</summary>
+                      <p class="small muted">These changes belong only to this isolated stress test and will not overwrite the personalized mainline.</p>
+                      <dl class="change-list">
+                        {% for key, before_value in sandbox_before.items() %}
+                          {% if key in sandbox_after %}<div><dt>{{ simulation_state_labels.get(key, key) }}</dt><dd>{{ before_value }} → {{ sandbox_after.get(key) }}</dd></div>{% endif %}
+                        {% endfor %}
+                      </dl>
+                    </details>
+                  {% endif %}
+                {% elif response.get('state_changes') %}
+                  <details class="history-details">
+                    <summary>View Rule State Changes</summary>
+                    <dl class="change-list">
+                      {% for change in response.get('state_changes') %}
+                        <div><dt>{{ change.get('label', change.get('key', 'State')) }}</dt><dd>{{ change.get('before', '—') }} → {{ change.get('after', '—') }}</dd></div>
+                      {% endfor %}
+                    </dl>
+                  </details>
+                {% endif %}
+              {% else %}
+                <p class="empty-state">No saved response exists for this event yet.</p>
+              {% endif %}
+            </article>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <section class="panel empty-panel">
+        <h2>No Event Records Yet</h2>
+        <p>After starting and submitting your first entrepreneurial decision, event blueprints, deployment types, states, and responses will appear here chronologically.</p>
+        <a class="button" href="{{ url_for('simulation_dashboard') }}">Go to Simulation Overview</a>
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

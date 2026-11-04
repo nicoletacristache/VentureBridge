@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field with context %}
+{% set form = form if form is defined else (request.form if request is defined and request.method == 'POST' else {}) %}
+
+{% block title %}VentureBridge | Editable, Traceable Entrepreneurship Simulation{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+  {% if new_access_code %}
+    <section class="access-code-panel" aria-labelledby="access-code-title">
+      <div class="shell access-code-panel__inner">
+        <div>
+          <p class="eyebrow">Shown once</p>
+          <h1 id="access-code-title">Save Your Access Code</h1>
+          <p>The server only stores irreversible hashes and cannot retrieve your original access code for you. Please save it to a trusted password manager; do not screenshot or forward it.</p>
+        </div>
+        <div class="access-code-box">
+          <code>{{ new_access_code }}</code>
+          <button class="button button--secondary" type="button" data-copy-value="{{ new_access_code|e }}">Copy Access Code</button>
+        </div>
+        <a class="button button--large" href="{{ url_for('onboarding') }}">I have saved it, continue building profile</a>
+      </div>
+    </section>
+  {% endif %}
+  <section class="hero">
+    <div class="shell hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Personalized Learning × Shared Anchor Events</p>
+        <h1>Practice evidence-based decision-making<br>in continuous entrepreneurial contexts</h1>
+        <p class="lede">First create an editable learner profile, then explore entrepreneurial directions. Your choices will alter the subsequent main storyline; phased shared anchor events help retain records necessary for cross-path comparability.</p>
+        <div class="hero__actions">
+          <a class="button button--large" href="#begin">Create Learning Space</a>
+          <a class="button button--secondary button--large" href="{{ url_for('transparency') }}">Understand System Boundaries</a>
+        </div>
+        <ul class="check-list" aria-label="System Features">
+          <li>Profile statements are editable; initial evidence, confidence levels, and conflict markers are viewable</li>
+          <li>Explicit state machine manages numerical resources; LLM output is constrained by structure and whitelist</li>
+          <li>Records process evidence; does not treat system encoding as a definitive conclusion on ability</li>
+        </ul>
+      </div>
+      <div class="hero__visual" aria-label="System Flow Diagram">
+        <div class="flow-card flow-card--primary">
+          <span class="flow-card__step">01</span>
+          <strong>Input &amp; Profile</strong>
+          <small>Background, experience, skills, interests, and constraints</small>
+        </div>
+        <div class="flow-connector" aria-hidden="true"></div>
+        <div class="flow-card">
+          <span class="flow-card__step">02</span>
+          <strong>Direction Exploration</strong>
+          <small>2–3 evidence-based, challengeable options</small>
+        </div>
+        <div class="flow-connector" aria-hidden="true"></div>
+        <div class="flow-card flow-card--anchor">
+          <span class="flow-card__step">03</span>
+          <strong>Dynamic Mainline + Co-Anchor Stress Test</strong>
+          <small>Continuous state; returns to mainline after anchor event</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="begin-title" id="begin">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Start or Continue</p>
+          <h2 id="begin-title">Enter Your Learning Space</h2>
+        </div>
+        <p class="section-note">Do not use real names. Access codes are used only to return to your own local learning records.</p>
+      </div>
+      <div class="split-cards">
+        <article class="panel">
+          <h3>First Time Use</h3>
+          <p>Create a de-identified alias and read the data usage instructions.</p>
+          <form method="post" action="{{ url_for('create_workspace') }}" class="stack-form">
+            {{ csrf_field() }}
+            <div class="field">
+              <label for="alias">Learning Alias</label>
+              <input id="alias" name="alias" type="text" autocomplete="nickname" maxlength="40" required
+                     value="{{ form.alias|default('') if form is defined else '' }}"
+                     aria-describedby="alias-help">
+              <p class="field-help" id="alias-help">Please do not enter names, student IDs, phone numbers, emails, or other personally identifiable information.</p>
+            </div>
+            <label class="check-field">
+              <input type="checkbox" name="consent_accepted" value="1" required>
+              <span>I have read and understood<a href="{{ url_for('transparency') }}">System Boundaries and Data Instructions</a>, and agree to process the materials I actively submit for this teaching simulation.</span>
+            </label>
+            <button class="button" type="submit">Create Learning Space</button>
+          </form>
+        </article>
+
+        <article class="panel panel--muted">
+          <h3>Continue Existing Progress</h3>
+          <p>Enter the access code obtained during creation. The system will not recover access codes via email.</p>
+          <form method="post" action="{{ url_for('login') }}" class="stack-form">
+            {{ csrf_field() }}
+            <div class="field">
+              <label for="resume-alias">Learning Alias</label>
+              <input id="resume-alias" name="alias" type="text" autocomplete="nickname" maxlength="40" required>
+            </div>
+            <div class="field">
+              <label for="access-code">Access Code</label>
+              <div class="input-action">
+                <input id="access-code" name="access_code" type="password" autocomplete="current-password" required
+                       minlength="8" maxlength="128">
+                <button class="button button--quiet" type="button" data-toggle-secret data-target="access-code" aria-pressed="false">Show</button>
+              </div>
+            </div>
+            <button class="button button--secondary" type="submit">Restore Mainline State</button>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="boundaries-title">
+    <div class="shell narrow">
+      <p class="eyebrow">Clarification First</p>
+      <h2 id="boundaries-title">Recommendations are exploration starting points, not labels</h2>
+      <div class="prose-grid">
+        <p>Experience and background text will be minimized before being sent to the configured LLM API for structured extraction. You can check original evidence, correct profiles, or reject recommendations.</p>
+        <p>MBTI is entirely optional, serving only as a low-weight and potentially changing self-preference clue. The system does not determine whether you are 'suitable' or 'unsuitable' for entrepreneurship based on MBTI.</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

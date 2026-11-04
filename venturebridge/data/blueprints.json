@@ -1,0 +1,1084 @@
+{
+  "schema_version": "1.0",
+  "library_version": "2026-11-03.core-en-v1",
+  "ecd_dimensions": [
+    "opportunity_framing",
+    "evidence_falsifiability",
+    "resource_finance",
+    "adaptive_action",
+    "stakeholder_ethics"
+  ],
+  "blueprints": [
+    {
+      "id": "main_customer_signal",
+      "family_id": "main_opportunity_discovery",
+      "kind": "main",
+      "title": "Ambiguous early customer signals",
+      "target_dimensions": [
+        "opportunity_framing",
+        "evidence_falsifiability"
+      ],
+      "difficulty_level": 2,
+      "tags": [
+        "general",
+        "consumer",
+        "services",
+        "technology",
+        "social",
+        "creative"
+      ],
+      "preconditions": {
+        "cash": {
+          "min": 5000,
+          "max": 1000000
+        },
+        "market_evidence": {
+          "min": 0,
+          "max": 80
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "opportunity_framing": "Distinguish between user statements, potential problems, and value hypotheses to be tested; do not treat a single opinion as a market conclusion.",
+        "evidence_falsifiability": "Explain what kind of counterexamples, comparisons, or behavioral evidence are needed to support or refute the current hypothesis."
+      },
+      "forms": [
+        {
+          "id": "main_customer_signal_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate an event where early customer signals contradict each other based on the current direction; preserve verifiable uncertainty, do not fabricate non-existent survey results, and do not alter any numerical status.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "SIGNAL_INTERVIEW_COMPARE",
+          "label": "Conduct comparative interviews and behavioral verification first",
+          "description": "Suspend scaling up investment; select distinct user groups to collect behavioral evidence that can falsify the hypothesis.",
+          "delta": {
+            "cash": -5000,
+            "market_evidence": 12,
+            "reputation": 2
+          },
+          "feedback_cue": "Feedback should point out the value of the evidence design and remind that interview statements still require cross-verification with behavioral data."
+        },
+        {
+          "action_code": "SIGNAL_PRESELL_NARROW",
+          "label": "Test willingness to pay with a small-scale pre-sale",
+          "description": "Conduct refundable pre-sales limited to specific audiences and commitment scopes, using actual payment behavior as a signal.",
+          "delta": {
+            "cash": 8000,
+            "market_evidence": 8,
+            "reputation": -1,
+            "compliance": -2
+          },
+          "feedback_cue": "Feedback should balance strong behavioral evidence against execution risks such as commitments, refunds, and data disclosure."
+        },
+        {
+          "action_code": "SIGNAL_BUILD_FULL",
+          "label": "Develop the full version directly based on current opinions",
+          "description": "Treat current positive opinions as requirement conclusions and immediately invest in full product development.",
+          "delta": {
+            "cash": -25000,
+            "product": 15,
+            "market_evidence": -3
+          },
+          "feedback_cue": "Feedback should present the trade-off between rapid output and the risk of rework caused by insufficient evidence."
+        }
+      ]
+    },
+    {
+      "id": "main_prototype_scope",
+      "family_id": "main_product_learning",
+      "kind": "main",
+      "title": "Uncontrolled prototype scope",
+      "target_dimensions": [
+        "resource_finance",
+        "adaptive_action"
+      ],
+      "difficulty_level": 2,
+      "tags": [
+        "general",
+        "technology",
+        "consumer",
+        "creative"
+      ],
+      "preconditions": {
+        "cash": {
+          "min": 10000,
+          "max": 1000000
+        },
+        "product": {
+          "min": 0,
+          "max": 85
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "resource_finance": "Explain feature trade-offs and opportunity costs based on cash, personnel, and validation value.",
+        "adaptive_action": "Propose an executable step-by-step plan, checkpoints, and adjustment conditions after failure."
+      },
+      "forms": [
+        {
+          "id": "main_prototype_scope_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate an event where prototype requirements keep increasing while development resources are constrained; the narrative must reference the given state but cannot arbitrarily add or subtract state values.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "SCOPE_SINGLE_ASSUMPTION",
+          "label": "Shrink down to a key hypothesis",
+          "description": "Remove features unrelated to this round of learning, set short-cycle validation and stop conditions.",
+          "delta": {
+            "cash": -10000,
+            "product": 8,
+            "market_evidence": 8,
+            "team": 3
+          },
+          "feedback_cue": "Feedback should connect resource concentration, learning speed, and clear stop conditions."
+        },
+        {
+          "action_code": "SCOPE_OUTSOURCE_ALL",
+          "label": "Outsource entirely to pursue speed",
+          "description": "Outsource the entire current complete list with high cash investment, retaining only acceptance internally.",
+          "delta": {
+            "cash": -35000,
+            "product": 18,
+            "team": -4,
+            "market_evidence": 1
+          },
+          "feedback_cue": "Feedback should present speed benefits, cash burn, and insufficient knowledge retention."
+        },
+        {
+          "action_code": "SCOPE_OVERTIME_ALL",
+          "label": "Maintain scope and require team overtime",
+          "description": "Do not change the functional scope, require the existing team to complete it within the original timeframe.",
+          "delta": {
+            "cash": -18000,
+            "product": 12,
+            "team": -12,
+            "reputation": -2
+          },
+          "feedback_cue": "Feedback should explain short-term progress versus team sustainability and quality risks."
+        }
+      ]
+    },
+    {
+      "id": "main_cash_runway",
+      "family_id": "main_resource_control",
+      "kind": "main",
+      "title": "Cash runway suddenly shortened",
+      "target_dimensions": [
+        "resource_finance",
+        "adaptive_action"
+      ],
+      "difficulty_level": 3,
+      "tags": [
+        "general",
+        "consumer",
+        "services",
+        "technology",
+        "social",
+        "creative"
+      ],
+      "preconditions": {
+        "cash": {
+          "min": 0,
+          "max": 1000000
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "resource_finance": "Estimate the cash runway, distinguishing between necessary expenses, deferrable expenses, and expenses directly related to learning objectives.",
+        "adaptive_action": "Set near-term action sequence, monitoring metrics, and alternative paths if cash continues to deteriorate."
+      },
+      "forms": [
+        {
+          "id": "main_cash_runway_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate an event of revenue delay or cost increase based on cash and current project stage; do not promise financing success, do not calculate new states for the rule engine.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "RUNWAY_CUT_AND_TEST",
+          "label": "Cut non-critical expenses and retain validation",
+          "description": "Stop non-essential investments, leave the limited budget for tests that most reduce uncertainty.",
+          "delta": {
+            "cash": 12000,
+            "market_evidence": 5,
+            "product": -2,
+            "team": -3
+          },
+          "feedback_cue": "Feedback should discuss extending the runway and declining product velocity, while checking if cuts impair key capabilities."
+        },
+        {
+          "action_code": "RUNWAY_DISCOUNT_SALES",
+          "label": "Significant discounting for short-term cash",
+          "description": "Rapidly sign deals with significant discounts and longer service commitments.",
+          "delta": {
+            "cash": 30000,
+            "reputation": -7,
+            "team": -5,
+            "compliance": -2
+          },
+          "feedback_cue": "Feedback should distinguish between short-term cash flow improvement and delivery burden, price anchoring, and commitment risks."
+        },
+        {
+          "action_code": "RUNWAY_KEEP_SPEND",
+          "label": "Maintain plan and wait for external funding",
+          "description": "Maintain original spending and development pace, relying on uncertain external funding to cover the gap.",
+          "delta": {
+            "cash": -28000,
+            "product": 10,
+            "team": -2
+          },
+          "feedback_cue": "Feedback should present survival risks caused by product progress and financing uncertainty."
+        }
+      ]
+    },
+    {
+      "id": "main_team_conflict",
+      "family_id": "main_team_governance",
+      "kind": "main",
+      "title": "Co-founder goal conflict",
+      "target_dimensions": [
+        "adaptive_action",
+        "stakeholder_ethics"
+      ],
+      "difficulty_level": 3,
+      "tags": [
+        "general",
+        "services",
+        "technology",
+        "social",
+        "creative"
+      ],
+      "preconditions": {
+        "team": {
+          "min": 10,
+          "max": 100
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "adaptive_action": "Convert conflict into executable roles, milestones, review points, and escalation conditions.",
+        "stakeholder_ethics": "Identify conflicts between authority and responsibility, information transparency, member interests, and customer commitments."
+      },
+      "forms": [
+        {
+          "id": "main_team_conflict_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate an event where co-founders have conflicting views on growth speed, product quality, or social responsibility; avoid using personality types as behavioral conclusions.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "TEAM_CHARTER_TRIAL",
+          "label": "Clarify authority and responsibilities and conduct a time-limited trial",
+          "description": "Document disagreements as decision rights, shared metrics, and a time-limited trial plan, scheduling a review.",
+          "delta": {
+            "team": 10,
+            "product": 4,
+            "reputation": 2
+          },
+          "feedback_cue": "Feedback should emphasize reversible trials and clear governance, while reminding about continuous monitoring."
+        },
+        {
+          "action_code": "TEAM_FOUNDER_DECIDES",
+          "label": "Decided unilaterally by the lead founder",
+          "description": "To pursue speed, the lead founder decides directly without further discussion of objections.",
+          "delta": {
+            "team": -14,
+            "product": 7,
+            "reputation": -2
+          },
+          "feedback_cue": "Feedback should present the trade-offs between decision speed and psychological safety, and information loss."
+        },
+        {
+          "action_code": "TEAM_DELAY_DECISION",
+          "label": "Defer handling conflict for now",
+          "description": "Continue existing work and wait for disagreements to fade naturally.",
+          "delta": {
+            "team": -8,
+            "product": -4,
+            "cash": -6000
+          },
+          "feedback_cue": "Feedback should point out the short-term comfort of avoiding direct conflict versus accumulated coordination costs."
+        }
+      ]
+    },
+    {
+      "id": "main_regulatory_warning",
+      "family_id": "main_responsible_launch",
+      "kind": "main",
+      "title": "Compliance warning prior to launch",
+      "target_dimensions": [
+        "resource_finance",
+        "stakeholder_ethics"
+      ],
+      "difficulty_level": 3,
+      "tags": [
+        "general",
+        "consumer",
+        "services",
+        "technology",
+        "social"
+      ],
+      "preconditions": {
+        "compliance": {
+          "min": 0,
+          "max": 90
+        },
+        "cash": {
+          "min": 5000,
+          "max": 1000000
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "resource_finance": "Explain compliance investment, delay costs, potential losses, and acceptable limits.",
+        "stakeholder_ethics": "Identify affected groups, notification obligations, data or security risks, and necessary protections."
+      },
+      "forms": [
+        {
+          "id": "main_regulatory_warning_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate an event where pre-launch gaps are identified in licensing, privacy, intellectual property, or consumer protection; do not provide definitive legal advice.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "COMPLIANCE_PAUSE_REVIEW",
+          "label": "Pause high-risk parts and conduct independent review",
+          "description": "Retain low-risk work, pause relevant features, and add professional review and user protection.",
+          "delta": {
+            "cash": -12000,
+            "product": -3,
+            "compliance": 18,
+            "reputation": 6
+          },
+          "feedback_cue": "Feedback should discuss delay costs, risk reduction, and review boundaries, without replacing professional opinions."
+        },
+        {
+          "action_code": "COMPLIANCE_LIMITED_PILOT",
+          "label": "Narrow scope and pilot with strengthened informed consent",
+          "description": "Limit user count and features, strengthen consent, opt-out, and manual monitoring before launching the pilot.",
+          "delta": {
+            "cash": -6000,
+            "market_evidence": 5,
+            "compliance": 8,
+            "reputation": 1
+          },
+          "feedback_cue": "Feedback should affirm risk minimization, but also remind that pilots cannot eliminate all legal and ethical obligations."
+        },
+        {
+          "action_code": "COMPLIANCE_LAUNCH_NOW",
+          "label": "Launch directly according to the original plan",
+          "description": "Believes gaining market advantage first is more important, retaining original scope and timeline.",
+          "delta": {
+            "cash": 10000,
+            "market_evidence": 6,
+            "compliance": -22,
+            "reputation": -12
+          },
+          "feedback_cue": "Feedback should clarify that short-term market learning does not offset compliance, trust, and affected party risks."
+        }
+      ]
+    },
+    {
+      "id": "main_market_shock",
+      "family_id": "main_adaptation",
+      "kind": "main",
+      "title": "Competitors change market conditions",
+      "target_dimensions": [
+        "opportunity_framing",
+        "adaptive_action"
+      ],
+      "difficulty_level": 4,
+      "tags": [
+        "general",
+        "consumer",
+        "services",
+        "technology",
+        "creative"
+      ],
+      "preconditions": {
+        "market_evidence": {
+          "min": 10,
+          "max": 100
+        }
+      },
+      "sandbox_state": null,
+      "evidence_requirements": {
+        "opportunity_framing": "Redefine the changed user problem, distinguishing between competitor actions and your own value assumptions.",
+        "adaptive_action": "Propose reversible adjustments, trigger thresholds, and follow-up observations that align with new evidence."
+      },
+      "forms": [
+        {
+          "id": "main_market_shock_generated",
+          "form_kind": "main",
+          "industry_context": "Use the entrepreneurial exploration direction selected by the learner",
+          "event_text": "Generate events where competitors lower prices, offer free options, or change channels, undermining original assumptions; provide incomplete information that allows for follow-up questions.",
+          "fixed": false
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "SHOCK_REFRAME_SEGMENT",
+          "label": "Revisit the problem and focus on niche scenarios",
+          "description": "First validate unserved usage scenarios, then decide on value propositions and small-scale adjustments.",
+          "delta": {
+            "cash": -7000,
+            "market_evidence": 10,
+            "product": 3,
+            "reputation": 2
+          },
+          "feedback_cue": "Feedback should explain the learning value of redefining the problem and the boundaries of being too narrowly focused."
+        },
+        {
+          "action_code": "SHOCK_MATCH_PRICE",
+          "label": "Immediately follow with a price cut",
+          "description": "Without changing the target market or product, directly match the competitor's price.",
+          "delta": {
+            "cash": -18000,
+            "market_evidence": 2,
+            "reputation": 1
+          },
+          "feedback_cue": "Feedback should present customer retention likelihood, unit economics, and lack of differentiation."
+        },
+        {
+          "action_code": "SHOCK_ADD_FEATURES",
+          "label": "Add features to create differentiation",
+          "description": "Quickly add multiple features without conducting new user validation for now.",
+          "delta": {
+            "cash": -24000,
+            "product": 14,
+            "market_evidence": -4,
+            "team": -6
+          },
+          "feedback_cue": "Feedback should discuss visible differentiation versus unvalidated complexity and team burden."
+        }
+      ]
+    },
+    {
+      "id": "anchor_opportunity_conflict",
+      "family_id": "anchor_opportunity",
+      "kind": "anchor",
+      "title": "Board Pressure Test: Conflicting Demand Evidence",
+      "target_dimensions": [
+        "opportunity_framing",
+        "evidence_falsifiability"
+      ],
+      "difficulty_level": 2,
+      "tags": [
+        "common_anchor"
+      ],
+      "preconditions": {},
+      "sandbox_state": {
+        "cash": 120000,
+        "team": 50,
+        "product": 35,
+        "market_evidence": 25,
+        "reputation": 50,
+        "compliance": 65
+      },
+      "sandbox_states": [
+        {
+          "id": "opportunity_base",
+          "state": {
+            "cash": 120000,
+            "team": 50,
+            "product": 35,
+            "market_evidence": 25,
+            "reputation": 50,
+            "compliance": 65
+          }
+        },
+        {
+          "id": "opportunity_evidence_reputation",
+          "state": {
+            "cash": 120000,
+            "team": 50,
+            "product": 35,
+            "market_evidence": 35,
+            "reputation": 42,
+            "compliance": 65
+          }
+        },
+        {
+          "id": "opportunity_team_compliance",
+          "state": {
+            "cash": 120000,
+            "team": 60,
+            "product": 35,
+            "market_evidence": 25,
+            "reputation": 50,
+            "compliance": 55
+          }
+        }
+      ],
+      "evidence_requirements": {
+        "opportunity_framing": "Define the problem, target audience, and alternative explanations from mutually conflicting statements.",
+        "evidence_falsifiability": "Propose evidence that distinguishes competing explanations and conditions to overturn current assumptions."
+      },
+      "forms": [
+        {
+          "id": "anchor_opportunity_exact_v1",
+          "form_kind": "exact",
+          "industry_context": "Industry-neutral common version",
+          "event_text": "The board gives you a set of common materials: 14 out of 20 interviewees say the problem is severe, but only 3 actively sought a solution in the last 30 days, and another 5 have already used free alternatives. The team has 120,000 yuan in cash remaining, and product completion is 35/100. You can approve only one next step today and must state what results would overturn your judgment.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_opportunity_surface_food_v1",
+          "form_kind": "surface",
+          "industry_context": "Campus Catering Services",
+          "event_text": "The board gives you a set of campus catering project materials: 14 out of 20 interviewees say pickup wait times are severe, but only 3 actively sought a solution in the last 30 days, and another 5 have already used free group chats as alternatives. The team has 120,000 yuan in cash remaining, and product completion is 35/100. You can approve only one next step today and must state what results would overturn your judgment.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_opportunity_surface_saas_v1",
+          "form_kind": "surface",
+          "industry_context": "Small Business Software",
+          "event_text": "The board gives you a set of small business software project materials: 14 out of 20 interviewees say scheduling issues are severe, but only 3 actively sought a solution in the last 30 days, and another 5 have already used free spreadsheets as alternatives. The team has 120,000 yuan in cash remaining, and product completion is 35/100. You can approve only one next step today and must state what results would overturn your judgment.",
+          "fixed": true
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "ANCHOR_OPP_BEHAVIOR_TEST",
+          "label": "Design Discriminatory Behavior Tests",
+          "description": "Select a clear target audience and conduct controlled tests on active behaviors and alternative solutions that can falsify hypotheses.",
+          "delta": {
+            "cash": -8000,
+            "market_evidence": 14,
+            "reputation": 2
+          },
+          "feedback_cue": "Feedback focuses on problem definition, alternative explanations, and falsifiable thresholds."
+        },
+        {
+          "action_code": "ANCHOR_OPP_BROAD_SURVEY",
+          "label": "Expand Attitude Surveys",
+          "description": "Ask more people if the problem is severe, but do not track actual behavior or alternative solutions.",
+          "delta": {
+            "cash": -4000,
+            "market_evidence": 5
+          },
+          "feedback_cue": "Feedback distinguishes between increased sample size and the fact that evidence type remains singular."
+        },
+        {
+          "action_code": "ANCHOR_OPP_BUILD_NOW",
+          "label": "Develop directly based on majority opinion",
+          "description": "Treat the 14 positive statements as demand confirmation and expand development.",
+          "delta": {
+            "cash": -25000,
+            "product": 14,
+            "market_evidence": -2
+          },
+          "feedback_cue": "Feedback presents development progress and notes that opportunity assumptions have not yet excluded alternative explanations."
+        }
+      ]
+    },
+    {
+      "id": "anchor_resource_tradeoff",
+      "family_id": "anchor_resource",
+      "kind": "anchor",
+      "title": "Board Pressure Test: Cash and Learning Speed",
+      "target_dimensions": [
+        "resource_finance",
+        "adaptive_action"
+      ],
+      "difficulty_level": 3,
+      "tags": [
+        "common_anchor"
+      ],
+      "preconditions": {},
+      "sandbox_state": {
+        "cash": 100000,
+        "team": 55,
+        "product": 45,
+        "market_evidence": 35,
+        "reputation": 55,
+        "compliance": 70
+      },
+      "sandbox_states": [
+        {
+          "id": "resource_base",
+          "state": {
+            "cash": 100000,
+            "team": 55,
+            "product": 45,
+            "market_evidence": 35,
+            "reputation": 55,
+            "compliance": 70
+          }
+        },
+        {
+          "id": "resource_product_reputation",
+          "state": {
+            "cash": 100000,
+            "team": 55,
+            "product": 35,
+            "market_evidence": 35,
+            "reputation": 65,
+            "compliance": 70
+          }
+        },
+        {
+          "id": "resource_team_compliance",
+          "state": {
+            "cash": 100000,
+            "team": 45,
+            "product": 45,
+            "market_evidence": 35,
+            "reputation": 55,
+            "compliance": 60
+          }
+        }
+      ],
+      "evidence_requirements": {
+        "resource_finance": "Compare cash runway, irreversible expenditures, learning value, and opportunity cost of short-term revenue.",
+        "adaptive_action": "Provide phased decisions, monitoring metrics, and thresholds for triggering adjustments."
+      },
+      "forms": [
+        {
+          "id": "anchor_resource_exact_v1",
+          "form_kind": "exact",
+          "industry_context": "Industry-Neutral Common Version",
+          "event_text": "The project has 100,000 yuan in cash. Option A: Pay 60,000 yuan immediately for the full version, expected launch in 8 weeks; Option B: Pay 20,000 yuan for a two-week pilot, which can validate the most critical assumptions but cannot scale sales immediately. Current evidence score is 35/100, with no financing commitments. The Board requires you to choose and outline resource allocation and stop conditions for the next four weeks.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_resource_surface_retail_v1",
+          "form_kind": "surface",
+          "industry_context": "Community Retail",
+          "event_text": "The Community Retail project has 100,000 yuan in cash. Option A: Pay 60,000 yuan immediately to build a complete store system, expected launch in 8 weeks; Option B: Pay 20,000 yuan for a two-week pop-up pilot, which can validate the most critical assumptions but cannot scale sales immediately. Current evidence score is 35/100, with no financing commitments. The Board requires you to choose and outline resource allocation and stop conditions for the next four weeks.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_resource_surface_education_v1",
+          "form_kind": "surface",
+          "industry_context": "Vocational Training",
+          "event_text": "The Vocational Training project has 100,000 yuan in cash. Option A: Pay 60,000 yuan immediately to develop a complete course platform, expected launch in 8 weeks; Option B: Pay 20,000 yuan for a two-week small-class pilot, which can validate the most critical assumptions but cannot scale sales immediately. Current evidence score is 35/100, with no financing commitments. The Board requires you to choose and outline resource allocation and stop conditions for the next four weeks.",
+          "fixed": true
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "ANCHOR_RES_STAGE_TEST",
+          "label": "Phased Pilot Investment",
+          "description": "Invest 20,000 yuan first for the pilot, freeze the remaining budget, and decide on the next phase based on preset thresholds.",
+          "delta": {
+            "cash": -20000,
+            "product": 6,
+            "market_evidence": 13,
+            "team": 2
+          },
+          "feedback_cue": "Feedback focuses on phased investment, evidence value, and whether stop conditions are clear."
+        },
+        {
+          "action_code": "ANCHOR_RES_FULL_BUILD",
+          "label": "Full Version Upfront Investment",
+          "description": "Pay 60,000 yuan to build the full version, aiming to launch in 8 weeks with a more complete product.",
+          "delta": {
+            "cash": -60000,
+            "product": 24,
+            "market_evidence": 2,
+            "team": -3
+          },
+          "feedback_cue": "Feedback discusses product progress, irreversible expenditures, and evidence levels."
+        },
+        {
+          "action_code": "ANCHOR_RES_FREEZE_ALL",
+          "label": "Stop Spending and Wait for Financing",
+          "description": "Do not conduct pilots or development within four weeks; focus on seeking financing that currently has no commitments.",
+          "delta": {
+            "cash": -5000,
+            "product": -2,
+            "market_evidence": -3,
+            "team": -6
+          },
+          "feedback_cue": "Feedback discusses the trade-off between preserving cash and losing learning opportunities and team momentum."
+        }
+      ]
+    },
+    {
+      "id": "anchor_team_governance",
+      "family_id": "anchor_team",
+      "kind": "anchor",
+      "title": "Board Pressure Test: Team Commitment Conflict",
+      "target_dimensions": [
+        "adaptive_action",
+        "stakeholder_ethics"
+      ],
+      "difficulty_level": 3,
+      "tags": [
+        "common_anchor"
+      ],
+      "preconditions": {},
+      "sandbox_state": {
+        "cash": 140000,
+        "team": 48,
+        "product": 50,
+        "market_evidence": 40,
+        "reputation": 60,
+        "compliance": 68
+      },
+      "sandbox_states": [
+        {
+          "id": "team_base",
+          "state": {
+            "cash": 140000,
+            "team": 48,
+            "product": 50,
+            "market_evidence": 40,
+            "reputation": 60,
+            "compliance": 68
+          }
+        },
+        {
+          "id": "team_cash_product",
+          "state": {
+            "cash": 115000,
+            "team": 48,
+            "product": 60,
+            "market_evidence": 40,
+            "reputation": 60,
+            "compliance": 68
+          }
+        },
+        {
+          "id": "team_evidence_compliance",
+          "state": {
+            "cash": 140000,
+            "team": 48,
+            "product": 50,
+            "market_evidence": 50,
+            "reputation": 60,
+            "compliance": 56
+          }
+        }
+      ],
+      "evidence_requirements": {
+        "adaptive_action": "Propose governance arrangements that are executable, reviewable, and do not permanently cement disagreements.",
+        "stakeholder_ethics": "Weigh employee awareness, customer commitments, founder authority, and fair procedures."
+      },
+      "forms": [
+        {
+          "id": "anchor_team_exact_v1",
+          "form_kind": "exact",
+          "industry_context": "Industry-Neutral Common Version",
+          "event_text": "A co-founder has committed to a key client for 30-day delivery. The technical lead believes at least 60 days are needed and states the team has been working consecutive overtime. Canceling the commitment may damage credibility, while forcing it could create quality and personnel risks. Team status is 48/100, credibility is 60/100. The Board requires a decision on how to handle this today.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_team_surface_health_v1",
+          "form_kind": "surface",
+          "industry_context": "Health Management Software",
+          "event_text": "In the Health Management Software project, a co-founder has committed to a key client for 30-day delivery. The technical lead believes at least 60 days are needed and states the team has been working consecutive overtime. Canceling the commitment may damage credibility, while forcing it could create quality and personnel risks. Team status is 48/100, credibility is 60/100. The Board requires a decision on how to handle this today.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_team_surface_logistics_v1",
+          "form_kind": "surface",
+          "industry_context": "City Logistics Services",
+          "event_text": "In the City Logistics project, a co-founder has committed to a key client for 30-day delivery. The operations lead believes at least 60 days are needed and states the team has been working consecutive overtime. Canceling the commitment may damage credibility, while forcing it could create quality and personnel risks. Team status is 48/100, credibility is 60/100. The Board requires a decision on how to handle this today.",
+          "fixed": true
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "ANCHOR_TEAM_RENEGOTIATE",
+          "label": "Transparent Negotiation and Phased Delivery",
+          "description": "Explain limitations to the client, propose a 30-day minimum delivery and 60-day full delivery, and clarify team responsibilities and review processes.",
+          "delta": {
+            "team": 12,
+            "product": 5,
+            "reputation": 4,
+            "cash": -8000
+          },
+          "feedback_cue": "Feedback focuses on transparent negotiation, phased commitments, and team protection."
+        },
+        {
+          "action_code": "ANCHOR_TEAM_FORCE_DEADLINE",
+          "label": "Maintain Commitment and Force Overtime",
+          "description": "Do not inform the client of internal dissent; require the team to complete all delivery within 30 days.",
+          "delta": {
+            "team": -20,
+            "product": 12,
+            "reputation": -5,
+            "compliance": -3
+          },
+          "feedback_cue": "Feedback highlights short-term delivery pressure, quality risks, and fair procedure risks."
+        },
+        {
+          "action_code": "ANCHOR_TEAM_CANCEL",
+          "label": "Unilaterally Cancel Customer Commitment",
+          "description": "Immediately cancel the project without discussing alternative delivery paths with the client or team.",
+          "delta": {
+            "team": 2,
+            "reputation": -16,
+            "cash": -5000
+          },
+          "feedback_cue": "Feedback discusses the value of cutting losses versus lack of negotiation and loss of credibility."
+        }
+      ]
+    },
+    {
+      "id": "anchor_uncertainty_update",
+      "family_id": "anchor_adaptation",
+      "kind": "anchor",
+      "title": "Board Pressure Test: New Evidence Requires Adjustment",
+      "target_dimensions": [
+        "evidence_falsifiability",
+        "adaptive_action"
+      ],
+      "difficulty_level": 4,
+      "tags": [
+        "common_anchor"
+      ],
+      "preconditions": {},
+      "sandbox_state": {
+        "cash": 90000,
+        "team": 58,
+        "product": 60,
+        "market_evidence": 55,
+        "reputation": 58,
+        "compliance": 72
+      },
+      "sandbox_states": [
+        {
+          "id": "adaptation_base",
+          "state": {
+            "cash": 90000,
+            "team": 58,
+            "product": 60,
+            "market_evidence": 55,
+            "reputation": 58,
+            "compliance": 72
+          }
+        },
+        {
+          "id": "adaptation_team_compliance",
+          "state": {
+            "cash": 90000,
+            "team": 48,
+            "product": 60,
+            "market_evidence": 55,
+            "reputation": 58,
+            "compliance": 62
+          }
+        },
+        {
+          "id": "adaptation_evidence_reputation",
+          "state": {
+            "cash": 90000,
+            "team": 58,
+            "product": 60,
+            "market_evidence": 40,
+            "reputation": 50,
+            "compliance": 72
+          }
+        }
+      ],
+      "evidence_requirements": {
+        "evidence_falsifiability": "Compare the quality of old and new evidence, explaining which observations are sufficient to alter the original judgment.",
+        "adaptive_action": "Update actions based on new evidence rather than mechanically sticking to them or completely overturning them, and set up follow-up checks."
+      },
+      "forms": [
+        {
+          "id": "anchor_uncertainty_exact_v1",
+          "form_kind": "exact",
+          "industry_context": "Industry-neutral common version",
+          "event_text": "Past tests showed 24 out of 40 trial users completed core tasks. In the new round, under the same recruitment criteria, only 10 out of 40 completed; logs show increased steps in the new interface, but user sources also changed slightly during the same period. Project Cash: 90,000 yuan; Product Score: 60/100. You must decide next week's action and explain how to distinguish between interface issues and population changes.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_uncertainty_surface_travel_v1",
+          "form_kind": "surface",
+          "industry_context": "City Travel Planning",
+          "event_text": "Travel Planning Project: Past tests showed 24 out of 40 trial users completed core tasks. In the new round, under the same recruitment criteria, only 10 out of 40 completed; logs show increased steps in the new interface, but user sources also changed slightly during the same period. Project Cash: 90,000 yuan; Product Score: 60/100. You must decide next week's action and explain how to distinguish between interface issues and population changes.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_uncertainty_surface_factory_v1",
+          "form_kind": "surface",
+          "industry_context": "Small Factory Scheduling",
+          "event_text": "Factory Scheduling Project: Past tests showed 24 out of 40 trial users completed core tasks. In the new round, under the same recruitment criteria, only 10 out of 40 completed; logs show increased steps in the new interface, but user sources also changed slightly during the same period. Project Cash: 90,000 yuan; Product Score: 60/100. You must decide next week's action and explain how to distinguish between interface issues and population changes.",
+          "fixed": true
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "ANCHOR_ADAPT_FACTORIAL_TEST",
+          "label": "Split factors for small-scale comparison",
+          "description": "Postpone full rollout, use minimum versions to compare interface and user sources separately, and preset update thresholds.",
+          "delta": {
+            "cash": -12000,
+            "market_evidence": 15,
+            "product": 3,
+            "team": 2
+          },
+          "feedback_cue": "Feedback focuses on competing explanations, falsifiable design, and action thresholds."
+        },
+        {
+          "action_code": "ANCHOR_ADAPT_ROLLBACK_UI",
+          "label": "Roll back interface immediately",
+          "description": "Attribute the decline entirely to the interface, restore the old version, and continue the original promotion plan.",
+          "delta": {
+            "cash": -6000,
+            "product": -8,
+            "market_evidence": 4,
+            "reputation": 1
+          },
+          "feedback_cue": "Feedback explains the value of quick reversible actions while noting that population changes have not yet been ruled out."
+        },
+        {
+          "action_code": "ANCHOR_ADAPT_IGNORE_NEW",
+          "label": "Stick with old conclusions and continue promotion",
+          "description": "Treat new results as random fluctuations, do not adjust product or recruitment.",
+          "delta": {
+            "cash": -22000,
+            "market_evidence": -6,
+            "reputation": -5
+          },
+          "feedback_cue": "Feedback points out the value of old evidence and the risk of ignoring repeatable new signals."
+        }
+      ]
+    },
+    {
+      "id": "anchor_ethics_compliance",
+      "family_id": "anchor_responsibility",
+      "kind": "anchor",
+      "title": "Board Stress Test: Growth vs. User Protection",
+      "target_dimensions": [
+        "resource_finance",
+        "stakeholder_ethics"
+      ],
+      "difficulty_level": 4,
+      "tags": [
+        "common_anchor"
+      ],
+      "preconditions": {},
+      "sandbox_state": {
+        "cash": 160000,
+        "team": 62,
+        "product": 70,
+        "market_evidence": 60,
+        "reputation": 65,
+        "compliance": 45
+      },
+      "sandbox_states": [
+        {
+          "id": "responsibility_base",
+          "state": {
+            "cash": 160000,
+            "team": 62,
+            "product": 70,
+            "market_evidence": 60,
+            "reputation": 65,
+            "compliance": 45
+          }
+        },
+        {
+          "id": "responsibility_evidence_reputation",
+          "state": {
+            "cash": 160000,
+            "team": 62,
+            "product": 70,
+            "market_evidence": 45,
+            "reputation": 55,
+            "compliance": 45
+          }
+        },
+        {
+          "id": "responsibility_team_product",
+          "state": {
+            "cash": 160000,
+            "team": 70,
+            "product": 58,
+            "market_evidence": 60,
+            "reputation": 65,
+            "compliance": 45
+          }
+        }
+      ],
+      "evidence_requirements": {
+        "resource_finance": "Quantify or define the resource costs of delays, reviews, and potential damages, avoiding focusing solely on principles.",
+        "stakeholder_ethics": "Identify data subjects, vulnerable users, partners, and regulatory responsibilities, and propose specific protections."
+      },
+      "forms": [
+        {
+          "id": "anchor_ethics_exact_v1",
+          "form_kind": "exact",
+          "industry_context": "Industry-neutral common version",
+          "event_text": "A growth partner is willing to prepay 50,000 yuan but requires uploading a batch of user behavior data. Existing notices only state \"used to improve services,\" without explicit third-party sharing; approximately 20% of users may belong to groups requiring additional protection. Delaying cooperation for four weeks will cost 15,000 yuan for review and modification. Project Cash: 160,000 yuan; Compliance: 45/100. You must present a decision to the board.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_ethics_surface_fitness_v1",
+          "form_kind": "surface",
+          "industry_context": "Sports Health Services",
+          "event_text": "The Sports Health project's growth partner is willing to prepay 50,000 yuan but requires uploading a batch of user behavior data. Existing notices only state \"used to improve services,\" without explicit third-party sharing; approximately 20% of users may belong to groups requiring additional protection. Delaying cooperation for four weeks will cost 15,000 yuan for review and modification. Project Cash: 160,000 yuan; Compliance: 45/100. You must present a decision to the board.",
+          "fixed": true
+        },
+        {
+          "id": "anchor_ethics_surface_jobs_v1",
+          "form_kind": "surface",
+          "industry_context": "Job Matching Services",
+          "event_text": "The Job Matching project's growth partner is willing to prepay 50,000 yuan but requires uploading a batch of user behavior data. Existing notices only state \"used to improve services,\" without explicit third-party sharing; approximately 20% of users may belong to groups requiring additional protection. Delaying cooperation for four weeks will cost 15,000 yuan for review and modification. Project Cash: 160,000 yuan; Compliance: 45/100. You must present a decision to the board.",
+          "fixed": true
+        }
+      ],
+      "actions": [
+        {
+          "action_code": "ANCHOR_ETHICS_PAUSE_MINIMIZE",
+          "label": "Pause and implement data minimization modifications",
+          "description": "Pay review costs, limit fields, re-notify, and set up opt-out and manual review for additional protection groups.",
+          "delta": {
+            "cash": -15000,
+            "compliance": 28,
+            "reputation": 12,
+            "market_evidence": -2
+          },
+          "feedback_cue": "Feedback focuses on specific protections, resource costs, and minimization principles."
+        },
+        {
+          "action_code": "ANCHOR_ETHICS_LIMITED_CONSENT",
+          "label": "Conduct cooperation only with users who re-consent",
+          "description": "Narrow data and user scope, obtain explicit consent and set up withdrawal mechanisms before conducting limited cooperation.",
+          "delta": {
+            "cash": 15000,
+            "compliance": 15,
+            "reputation": 6,
+            "market_evidence": 3
+          },
+          "feedback_cue": "Feedback discusses trade-offs of limiting scope, consent quality, and ongoing supervision."
+        },
+        {
+          "action_code": "ANCHOR_ETHICS_SHARE_NOW",
+          "label": "Share directly according to existing notices",
+          "description": "Accept the 50,000 yuan prepayment, believing the original broad notice is sufficient, without adding extra protections.",
+          "delta": {
+            "cash": 50000,
+            "compliance": -30,
+            "reputation": -20,
+            "market_evidence": 5
+          },
+          "feedback_cue": "Feedback clarifies that short-term revenue cannot eliminate consent, vulnerable group, and trust risks."
+        }
+      ]
+    }
+  ]
+}

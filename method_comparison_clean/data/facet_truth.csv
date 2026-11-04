@@ -1,0 +1,354 @@
+dataset_version,synthetic,facet_type,facet_id,dimension,time_id,state_name,value_true,unit,notes
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_customer_signal,opportunity_framing,,,-0.45041,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_customer_signal,evidence_falsifiability,,,-0.558592,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_customer_signal,stakeholder_ethics,,,-0.405098,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_customer_signal_generated,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_customer_signal_generated,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_customer_signal_generated,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_prototype_scope,resource_finance,,,-0.30097,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_prototype_scope,adaptive_action,,,-0.368149,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_prototype_scope,evidence_falsifiability,,,-0.377822,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_prototype_scope_generated,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_prototype_scope_generated,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_prototype_scope_generated,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_cash_runway,resource_finance,,,-0.001467,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_cash_runway,adaptive_action,,,-0.072353,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_cash_runway,opportunity_framing,,,-0.122037,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_cash_runway_generated,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_cash_runway_generated,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_cash_runway_generated,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_team_conflict,adaptive_action,,,0.110113,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_team_conflict,stakeholder_ethics,,,0.007101,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_team_conflict,resource_finance,,,-0.077733,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_team_conflict_generated,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_team_conflict_generated,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_team_conflict_generated,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_regulatory_warning,resource_finance,,,-0.040521,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_regulatory_warning,stakeholder_ethics,,,-0.006433,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_regulatory_warning,opportunity_framing,,,-0.17782,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_regulatory_warning_generated,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_regulatory_warning_generated,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_regulatory_warning_generated,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_market_shock,opportunity_framing,,,0.552894,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_market_shock,adaptive_action,,,0.619832,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,main_market_shock,evidence_falsifiability,,,0.559143,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_market_shock_generated,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_market_shock_generated,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,main_market_shock_generated,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_opportunity_conflict,opportunity_framing,,,-0.460302,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_opportunity_conflict,evidence_falsifiability,,,-0.540206,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_opportunity_conflict,stakeholder_ethics,,,-0.619197,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_exact_v1,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_exact_v1,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_exact_v1,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_food_v1,opportunity_framing,,,0.145335,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_food_v1,evidence_falsifiability,,,0.129347,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_food_v1,stakeholder_ethics,,,-0.122018,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_saas_v1,opportunity_framing,,,0.105636,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_saas_v1,evidence_falsifiability,,,-0.168977,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_opportunity_surface_saas_v1,stakeholder_ethics,,,0.169477,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_resource_tradeoff,resource_finance,,,0.165626,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_resource_tradeoff,adaptive_action,,,-0.07626,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_resource_tradeoff,evidence_falsifiability,,,-0.165694,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_exact_v1,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_exact_v1,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_exact_v1,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_retail_v1,resource_finance,,,0.20084,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_retail_v1,adaptive_action,,,-0.13366,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_retail_v1,evidence_falsifiability,,,-0.121939,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_education_v1,resource_finance,,,-0.172469,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_education_v1,adaptive_action,,,0.133371,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_resource_surface_education_v1,evidence_falsifiability,,,0.126563,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_team_governance,adaptive_action,,,-0.028204,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_team_governance,stakeholder_ethics,,,0.170419,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_team_governance,opportunity_framing,,,-0.023539,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_exact_v1,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_exact_v1,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_exact_v1,opportunity_framing,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_health_v1,adaptive_action,,,-0.218898,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_health_v1,stakeholder_ethics,,,-0.252811,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_health_v1,opportunity_framing,,,-0.159103,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_logistics_v1,adaptive_action,,,-0.248838,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_logistics_v1,stakeholder_ethics,,,-0.106056,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_team_surface_logistics_v1,opportunity_framing,,,-0.119755,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_uncertainty_update,evidence_falsifiability,,,0.537103,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_uncertainty_update,adaptive_action,,,0.442205,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_uncertainty_update,stakeholder_ethics,,,0.552292,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_exact_v1,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_exact_v1,adaptive_action,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_exact_v1,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_travel_v1,evidence_falsifiability,,,-0.247801,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_travel_v1,adaptive_action,,,-0.166808,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_travel_v1,stakeholder_ethics,,,0.244201,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_factory_v1,evidence_falsifiability,,,0.44,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_factory_v1,adaptive_action,,,0.36,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_uncertainty_surface_factory_v1,stakeholder_ethics,,,0.218323,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_ethics_compliance,resource_finance,,,0.612011,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_ethics_compliance,stakeholder_ethics,,,0.352445,logit,difficulty_level plus frozen dimension jitter; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,blueprint_difficulty,anchor_ethics_compliance,evidence_falsifiability,,,0.522596,logit,difficulty_level plus frozen dimension jitter; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_exact_v1,resource_finance,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_exact_v1,stakeholder_ethics,,,0.0,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_exact_v1,evidence_falsifiability,,,0.0,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_fitness_v1,resource_finance,,,0.144817,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_fitness_v1,stakeholder_ethics,,,0.168895,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_fitness_v1,evidence_falsifiability,,,-0.200409,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_jobs_v1,resource_finance,,,0.114336,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_jobs_v1,stakeholder_ethics,,,-0.138629,logit,exact and main forms are zero references; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,surface_form_effect,anchor_ethics_surface_jobs_v1,evidence_falsifiability,,,-0.235757,logit,exact and main forms are zero references; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:cash,opportunity_framing,,cash,0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:team,opportunity_framing,,team,-0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:product,opportunity_framing,,product,0.18,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:market_evidence,opportunity_framing,,market_evidence,-0.36,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:reputation,opportunity_framing,,reputation,-0.1,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:compliance,opportunity_framing,,compliance,0.04,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:cash,evidence_falsifiability,,cash,0.03,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:team,evidence_falsifiability,,team,-0.04,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:product,evidence_falsifiability,,product,0.1,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:market_evidence,evidence_falsifiability,,market_evidence,-0.39,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:reputation,evidence_falsifiability,,reputation,-0.08,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:compliance,evidence_falsifiability,,compliance,-0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:cash,resource_finance,,cash,-0.36,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:team,resource_finance,,team,0.12,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:product,resource_finance,,product,0.18,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:market_evidence,resource_finance,,market_evidence,0.09,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:reputation,resource_finance,,reputation,0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:compliance,resource_finance,,compliance,-0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:cash,adaptive_action,,cash,-0.18,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:team,adaptive_action,,team,-0.21,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:product,adaptive_action,,product,0.12,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:market_evidence,adaptive_action,,market_evidence,-0.18,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:reputation,adaptive_action,,reputation,-0.08,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:compliance,adaptive_action,,compliance,-0.1,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:cash,stakeholder_ethics,,cash,0.06,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:team,stakeholder_ethics,,team,-0.13,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:product,stakeholder_ethics,,product,0.04,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:market_evidence,stakeholder_ethics,,market_evidence,0.05,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:reputation,stakeholder_ethics,,reputation,-0.21,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,state_coefficient,state:compliance,stakeholder_ethics,,compliance,-0.36,logit_per_state_z,subtracted from ability in the generating equation
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_customer_signal,opportunity_framing,,,0.04217,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_customer_signal,evidence_falsifiability,,,0.04217,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_customer_signal,stakeholder_ethics,,,0.04217,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_prototype_scope,resource_finance,,,0.305609,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_prototype_scope,adaptive_action,,,0.305609,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_prototype_scope,evidence_falsifiability,,,0.305609,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_cash_runway,resource_finance,,,0.364157,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_cash_runway,adaptive_action,,,0.364157,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_cash_runway,opportunity_framing,,,0.364157,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_team_conflict,adaptive_action,,,-0.65507,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_team_conflict,stakeholder_ethics,,,-0.65507,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_team_conflict,resource_finance,,,-0.65507,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_regulatory_warning,resource_finance,,,0.135947,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_regulatory_warning,stakeholder_ethics,,,0.135947,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_regulatory_warning,opportunity_framing,,,0.135947,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_market_shock,opportunity_framing,,,-0.557356,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_market_shock,adaptive_action,,,-0.557356,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P1_technology_product::main_market_shock,evidence_falsifiability,,,-0.557356,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_customer_signal,opportunity_framing,,,-0.303141,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_customer_signal,evidence_falsifiability,,,-0.303141,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_customer_signal,stakeholder_ethics,,,-0.303141,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_prototype_scope,resource_finance,,,0.173876,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_prototype_scope,adaptive_action,,,0.173876,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_prototype_scope,evidence_falsifiability,,,0.173876,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_cash_runway,resource_finance,,,0.072159,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_cash_runway,adaptive_action,,,0.072159,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_cash_runway,opportunity_framing,,,0.072159,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_team_conflict,adaptive_action,,,-0.628389,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_team_conflict,stakeholder_ethics,,,-0.628389,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_team_conflict,resource_finance,,,-0.628389,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_regulatory_warning,resource_finance,,,0.553174,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_regulatory_warning,stakeholder_ethics,,,0.553174,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_regulatory_warning,opportunity_framing,,,0.553174,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_market_shock,opportunity_framing,,,0.678499,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_market_shock,adaptive_action,,,0.678499,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P2_commerce_market::main_market_shock,evidence_falsifiability,,,0.678499,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_customer_signal,opportunity_framing,,,0.002365,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_customer_signal,evidence_falsifiability,,,0.002365,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_customer_signal,stakeholder_ethics,,,0.002365,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_prototype_scope,resource_finance,,,-0.441771,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_prototype_scope,adaptive_action,,,-0.441771,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_prototype_scope,evidence_falsifiability,,,-0.441771,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_cash_runway,resource_finance,,,-0.228683,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_cash_runway,adaptive_action,,,-0.228683,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_cash_runway,opportunity_framing,,,-0.228683,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_team_conflict,adaptive_action,,,0.30994,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_team_conflict,stakeholder_ethics,,,0.30994,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_team_conflict,resource_finance,,,0.30994,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_regulatory_warning,resource_finance,,,-0.418321,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_regulatory_warning,stakeholder_ethics,,,-0.418321,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_regulatory_warning,opportunity_framing,,,-0.418321,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_market_shock,opportunity_framing,,,-0.015471,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_market_shock,adaptive_action,,,-0.015471,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P3_social_service::main_market_shock,evidence_falsifiability,,,-0.015471,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_customer_signal,opportunity_framing,,,-0.678033,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_customer_signal,evidence_falsifiability,,,-0.678033,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_customer_signal,stakeholder_ethics,,,-0.678033,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_prototype_scope,resource_finance,,,0.330274,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_prototype_scope,adaptive_action,,,0.330274,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_prototype_scope,evidence_falsifiability,,,0.330274,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_cash_runway,resource_finance,,,0.367229,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_cash_runway,adaptive_action,,,0.367229,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_cash_runway,opportunity_framing,,,0.367229,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_team_conflict,adaptive_action,,,0.469555,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_team_conflict,stakeholder_ethics,,,0.469555,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_team_conflict,resource_finance,,,0.469555,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_regulatory_warning,resource_finance,,,-0.351127,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_regulatory_warning,stakeholder_ethics,,,-0.351127,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_regulatory_warning,opportunity_framing,,,-0.351127,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_market_shock,opportunity_framing,,,-0.170478,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_market_shock,adaptive_action,,,-0.170478,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=primary
+venturebridge-synthetic-method-validation-v1.8.0,1,profile_blueprint_path_difficulty,P4_interdisciplinary_resource::main_market_shock,evidence_falsifiability,,,-0.170478,logit,observable profile-by-blueprint fixed challenge; event residual is separate; evidence_role=secondary
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,opportunity_framing,1,,-0.460618,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,evidence_falsifiability,1,,-0.441086,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,resource_finance,1,,-0.437872,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,adaptive_action,1,,-0.503917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,stakeholder_ethics,1,,-0.471136,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,opportunity_framing,2,,-0.385618,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,evidence_falsifiability,2,,-0.366086,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,resource_finance,2,,-0.362872,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,adaptive_action,2,,-0.428917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,stakeholder_ethics,2,,-0.396136,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,opportunity_framing,3,,-0.310618,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,evidence_falsifiability,3,,-0.291086,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,resource_finance,3,,-0.287872,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,adaptive_action,3,,-0.353917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,stakeholder_ethics,3,,-0.321136,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,opportunity_framing,4,,-0.235618,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,evidence_falsifiability,4,,-0.216086,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,resource_finance,4,,-0.212872,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,adaptive_action,4,,-0.278917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R1,stakeholder_ethics,4,,-0.246136,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,opportunity_framing,1,,-0.246027,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,evidence_falsifiability,1,,-0.247909,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,resource_finance,1,,-0.284655,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,adaptive_action,1,,-0.272768,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,stakeholder_ethics,1,,-0.316472,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,opportunity_framing,2,,-0.311027,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,evidence_falsifiability,2,,-0.312909,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,resource_finance,2,,-0.349655,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,adaptive_action,2,,-0.337768,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,stakeholder_ethics,2,,-0.381472,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,opportunity_framing,3,,-0.376027,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,evidence_falsifiability,3,,-0.377909,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,resource_finance,3,,-0.414655,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,adaptive_action,3,,-0.402768,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,stakeholder_ethics,3,,-0.446472,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,opportunity_framing,4,,-0.441027,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,evidence_falsifiability,4,,-0.442909,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,resource_finance,4,,-0.479655,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,adaptive_action,4,,-0.467768,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R2,stakeholder_ethics,4,,-0.511472,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,opportunity_framing,1,,-0.134177,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,evidence_falsifiability,1,,-0.073508,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,resource_finance,1,,-0.124924,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,adaptive_action,1,,-0.131562,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,stakeholder_ethics,1,,-0.083721,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,opportunity_framing,2,,-0.054177,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,evidence_falsifiability,2,,0.006492,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,resource_finance,2,,-0.044924,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,adaptive_action,2,,-0.051562,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,stakeholder_ethics,2,,-0.003721,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,opportunity_framing,3,,0.025823,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,evidence_falsifiability,3,,0.086492,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,resource_finance,3,,0.035076,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,adaptive_action,3,,0.028438,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,stakeholder_ethics,3,,0.076279,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,opportunity_framing,4,,0.105823,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,evidence_falsifiability,4,,0.166492,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,resource_finance,4,,0.115076,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,adaptive_action,4,,0.108438,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R3,stakeholder_ethics,4,,0.156279,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,opportunity_framing,1,,0.115215,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,evidence_falsifiability,1,,0.1024,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,resource_finance,1,,0.132032,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,adaptive_action,1,,0.114896,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,stakeholder_ethics,1,,0.082999,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,opportunity_framing,2,,0.040215,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,evidence_falsifiability,2,,0.0274,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,resource_finance,2,,0.057032,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,adaptive_action,2,,0.039896,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,stakeholder_ethics,2,,0.007999,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,opportunity_framing,3,,-0.034785,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,evidence_falsifiability,3,,-0.0476,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,resource_finance,3,,-0.017968,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,adaptive_action,3,,-0.035104,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,stakeholder_ethics,3,,-0.067001,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,opportunity_framing,4,,-0.109785,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,evidence_falsifiability,4,,-0.1226,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,resource_finance,4,,-0.092968,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,adaptive_action,4,,-0.110104,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R4,stakeholder_ethics,4,,-0.142001,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,opportunity_framing,1,,0.262108,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,evidence_falsifiability,1,,0.24013,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,resource_finance,1,,0.238297,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,adaptive_action,1,,0.313646,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,stakeholder_ethics,1,,0.30702,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,opportunity_framing,2,,0.322108,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,evidence_falsifiability,2,,0.30013,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,resource_finance,2,,0.298297,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,adaptive_action,2,,0.373646,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,stakeholder_ethics,2,,0.36702,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,opportunity_framing,3,,0.382108,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,evidence_falsifiability,3,,0.36013,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,resource_finance,3,,0.358297,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,adaptive_action,3,,0.433646,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,stakeholder_ethics,3,,0.42702,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,opportunity_framing,4,,0.442108,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,evidence_falsifiability,4,,0.42013,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,resource_finance,4,,0.418297,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,adaptive_action,4,,0.493646,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R5,stakeholder_ethics,4,,0.48702,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,opportunity_framing,1,,0.468423,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,evidence_falsifiability,1,,0.486987,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,resource_finance,1,,0.48417,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,adaptive_action,1,,0.45486,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,stakeholder_ethics,1,,0.48879,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,opportunity_framing,2,,0.383423,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,evidence_falsifiability,2,,0.401987,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,resource_finance,2,,0.39917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,adaptive_action,2,,0.36986,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,stakeholder_ethics,2,,0.40379,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,opportunity_framing,3,,0.298423,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,evidence_falsifiability,3,,0.316987,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,resource_finance,3,,0.31417,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,adaptive_action,3,,0.28486,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,stakeholder_ethics,3,,0.31879,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,opportunity_framing,4,,0.213423,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,evidence_falsifiability,4,,0.231987,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,resource_finance,4,,0.22917,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,adaptive_action,4,,0.19986,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,rater_severity,R6,stakeholder_ethics,4,,0.23379,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v1,opportunity_framing,,,-0.290695,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v1,evidence_falsifiability,,,-0.302088,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v1,resource_finance,,,-0.248566,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v1,adaptive_action,,,-0.272389,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v1,stakeholder_ethics,,,-0.26995,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v2,opportunity_framing,,,0.278529,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v2,evidence_falsifiability,,,0.275213,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v2,resource_finance,,,0.276744,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v2,adaptive_action,,,0.280078,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,version_effect,scorer-v2,stakeholder_ethics,,,0.308103,logit,positive values lower observed ratings
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_1,opportunity_framing,,,-1.15,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_2,opportunity_framing,,,-0.35,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_3,opportunity_framing,,,0.4,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_4,opportunity_framing,,,1.2,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_1,evidence_falsifiability,,,-1.15,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_2,evidence_falsifiability,,,-0.35,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_3,evidence_falsifiability,,,0.4,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_4,evidence_falsifiability,,,1.2,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_1,resource_finance,,,-1.15,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_2,resource_finance,,,-0.35,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_3,resource_finance,,,0.4,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_4,resource_finance,,,1.2,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_1,adaptive_action,,,-1.15,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_2,adaptive_action,,,-0.35,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_3,adaptive_action,,,0.4,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_4,adaptive_action,,,1.2,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_1,stakeholder_ethics,,,-1.15,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_2,stakeholder_ethics,,,-0.35,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_3,stakeholder_ethics,,,0.4,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,ordinal_threshold,threshold_4,stakeholder_ethics,,,1.2,logit,shared generating threshold
+venturebridge-synthetic-method-validation-v1.8.0,1,population_mean_growth,mean_growth_per_turn,opportunity_framing,,,0.019,theta_SD_per_turn,individual growth additionally varies
+venturebridge-synthetic-method-validation-v1.8.0,1,population_mean_growth,mean_growth_per_turn,evidence_falsifiability,,,0.021,theta_SD_per_turn,individual growth additionally varies
+venturebridge-synthetic-method-validation-v1.8.0,1,population_mean_growth,mean_growth_per_turn,resource_finance,,,0.018,theta_SD_per_turn,individual growth additionally varies
+venturebridge-synthetic-method-validation-v1.8.0,1,population_mean_growth,mean_growth_per_turn,adaptive_action,,,0.024,theta_SD_per_turn,individual growth additionally varies
+venturebridge-synthetic-method-validation-v1.8.0,1,population_mean_growth,mean_growth_per_turn,stakeholder_ethics,,,0.017,theta_SD_per_turn,individual growth additionally varies

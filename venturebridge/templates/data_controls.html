@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field with context %}
+{% set u = current_user if current_user is defined else (g.user if g is defined and g.user else {}) %}
+{% set shown_workspace_id = workspace_id if workspace_id is defined else (u.get('id') if u is mapping else none) %}
+{% set shown_created_at = created_at if created_at is defined else (u.get('created_at') if u is mapping else none) %}
+{% set shown_updated_at = storage_updated_at if storage_updated_at is defined else (u.get('updated_at') if u is mapping else none) %}
+{% set inventory = data_inventory|default([]) %}
+
+{% block title %}My Data & Control | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header page-header--single">
+      <div>
+        <p class="eyebrow">Data Control</p>
+        <h1>View, Correct, or Delete Your Data</h1>
+        <p class="lede">The system associates records with a learning space identifier and does not require real names. You can check what is currently saved and end this entire learning space here.</p>
+      </div>
+    </header>
+
+    <div class="data-layout">
+      <div class="data-main">
+        <section class="panel" aria-labelledby="identity-title">
+          <div class="section-heading section-heading--compact">
+            <div><p class="eyebrow">Learning Space</p><h2 id="identity-title">Current Identity Information</h2></div>
+          </div>
+          <dl class="data-list">
+            <div><dt>Learning Alias</dt><dd>{{ u.get('alias', user_alias|default('Not Provided')) if u is mapping else user_alias|default('Not Provided') }}</dd></div>
+            {% if shown_workspace_id %}<div><dt>Space Identifier</dt><dd><code>{{ shown_workspace_id }}</code></dd></div>{% endif %}
+            {% if shown_created_at %}<div><dt>Created At</dt><dd>{{ shown_created_at }}</dd></div>{% endif %}
+          </dl>
+          <p class="small muted">Access codes are stored only as irreversible hashes; pages and logs do not display the original access code. If lost, a new learning space must be created.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="inventory-title">
+          <div class="section-heading section-heading--compact">
+            <div><p class="eyebrow">Data Inventory</p><h2 id="inventory-title">{{ 'Records Currently Saved' if inventory else 'Record Categories Saved by This System' }}</h2></div>
+            {% if shown_updated_at %}<p class="section-note">Learning Space Updated on {{ shown_updated_at }}</p>{% endif %}
+          </div>
+          {% if inventory %}
+            <div class="inventory-grid">
+              {% for item in inventory %}
+                <article>
+                  <span class="inventory-grid__count">{{ item.get('count', 0) }}</span>
+                  <h3>{{ item.get('label', 'Record') }}</h3>
+                  {% if item.get('description') %}<p>{{ item.get('description') }}</p>{% endif %}
+                  {% if item.get('url') %}<a href="{{ item.get('url') }}">View or Correct</a>{% endif %}
+                </article>
+              {% endfor %}
+            </div>
+          {% else %}
+            <ul class="data-categories">
+              <li><strong>Profile & Persona</strong><span>De-identified profile data, persona versions, and correction notes you submitted</span></li>
+              <li><strong>Recommendations</strong><span>Generated directions, rationale, uncertainty, and selected direction</span></li>
+              <li><strong>Simulation Trajectory</strong><span>Events, deployment metadata, responses, state transitions, and feedback</span></li>
+              <li><strong>Process Coding Records</strong><span>Uncalibrated five-dimensional text evidence, rater and model version identifiers</span></li>
+              <li><strong>System Audit</strong><span>Prompts/model versions, invocation status, input summary hash, and structurally validated model outputs</span></li>
+            </ul>
+          {% endif %}
+          <div class="button-row button-row--start">
+            <a class="button button--secondary" href="{{ url_for('profile_review') }}">View and Correct Profile</a>
+            <a class="button button--secondary" href="{{ url_for('simulation_history') }}">View Simulation Trajectory</a>
+            <a class="button button--secondary" href="{{ url_for('export_data') }}">Export My JSON Data</a>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="api-data-title">
+          <p class="eyebrow">LLM API</p>
+          <h2 id="api-data-title">What Content Is Sent to Model Services</h2>
+          <p>Only minimal content necessary to complete the current task is sent when generating profiles, recommendations, event narratives, feedback, or process evidence coding. The application does not include API keys, access codes, or internal database identifiers in prompts.</p>
+          <ul class="plain-list">
+            <li>Profile Phase: De-identified background and experience text, plus structured preference fields</li>
+            <li>Event Phase: Necessary profile summaries, current visible state, historical decision summaries, and controlled blueprints</li>
+            <li>Feedback Phase: Current event content and responses actively submitted by the learner</li>
+          </ul>
+          <p class="small muted">Actual API providers and their data processing rules are configured by the deployer. A corresponding data protection review should be completed by the educational institution prior to use.</p>
+        </section>
+      </div>
+
+      <aside class="data-side">
+        <section class="panel control-summary">
+          <h2>Your Control Rights</h2>
+          <ol>
+            <li><span>1</span><div><strong>View</strong><p>Trace profile evidence, recommendation rationale, and event history.</p></div></li>
+            <li><span>2</span><div><strong>Correct</strong><p>Create new profile versions to correct LLM misinterpretations or outdated information.</p></div></li>
+            <li><span>3</span><div><strong>Delete</strong><p>Delete the learning space and its associated records.</p></div></li>
+          </ol>
+        </section>
+        <section class="notice notice--warning">
+          <strong>Avoid Secondary Exposure</strong>
+          <p>Do not forward page screenshots to unrelated personnel when viewing history. If you find submitted content contains identity information, correct or delete it first.</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="panel panel--danger delete-zone" aria-labelledby="delete-title">
+      <div>
+        <p class="eyebrow">Dangerous Action</p>
+        <h2 id="delete-title">Delete Entire Learning Space</h2>
+        <p>This operation will delete profiles, recommendations, simulations, responses, and their associated records, and exit the current session. Local data after deletion cannot be recovered through this system; independent security logs that the deployer is legally required to retain are not covered by this commitment and should follow institutional guidelines.</p>
+      </div>
+      <form method="post" action="{{ url_for('delete_data') }}" class="delete-form">
+        {{ csrf_field() }}
+        <div class="field">
+          <label for="delete-confirmation">Enter "Delete All Data" to confirm</label>
+          <input id="delete-confirmation" name="confirmation" type="text" required
+                 pattern="Delete All Data" autocomplete="off">
+        </div>
+        <label class="check-field">
+          <input type="checkbox" name="understand_irreversible" value="1" required>
+          <span>I understand these records cannot be recovered from this system after deletion.</span>
+        </label>
+        <button class="button button--danger" type="submit"
+                data-confirm-message="Are you sure you want to delete the entire learning space and its associated records? This action cannot be undone."
+                data-submit-label="Deleting...">Permanently Delete Learning Space</button>
+      </form>
+    </section>
+  </div>
+{% endblock %}

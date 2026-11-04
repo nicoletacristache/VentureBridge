@@ -1,0 +1,92 @@
+{% from '_macros.html' import csrf_field with context %}
+{% set viewer = current_user if current_user is defined else (g.user if g is defined and g.user else none) %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="VentureBridge: Constrained Continuous Entrepreneurship Teaching Simulation System">
+  <title>{% block title %}{{ title|default('VentureBridge') }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="purpose-banner" role="note">
+    <div class="shell purpose-banner__inner">
+      <span class="purpose-banner__label">Usage Boundaries</span>
+      <span>This system is for entrepreneurship teaching simulation only and does not constitute investment, legal, career, or real-world business advice.</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="VentureBridge Home Page">
+        <span class="brand__mark" aria-hidden="true">VB</span>
+        <span>
+          <strong>VentureBridge</strong>
+          <small>Shared Anchor Entrepreneurship Learning Lab</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+        <span class="sr-only">Toggle navigation</span>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary Navigation" data-nav>
+        {% set current_path = request.path if request is defined else '' %}
+        {% if viewer %}
+          <a href="{{ url_for('profile_review') }}" {% if current_path.startswith('/profile') %}aria-current="page"{% endif %}>Learner Profile</a>
+          <a href="{{ url_for('recommendations') }}" {% if current_path.startswith('/recommend') %}aria-current="page"{% endif %}>Explore Directions</a>
+          <a href="{{ url_for('simulation_dashboard') }}" {% if current_path.startswith('/simulation') %}aria-current="page"{% endif %}>Continuous Simulation</a>
+          <a href="{{ url_for('data_controls') }}" {% if current_path.startswith('/data') %}aria-current="page"{% endif %}>My Data</a>
+          <form class="nav-form" method="post" action="{{ url_for('logout') }}">
+            {{ csrf_field() }}
+            <button class="button button--quiet button--small" type="submit">Secure Logout</button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('transparency') }}" {% if current_path.startswith('/transparency') %}aria-current="page"{% endif %}>How the System Works</a>
+          <a class="button button--small" href="{{ url_for('home') }}#begin">Get Started</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="shell flash-stack" aria-live="polite" aria-atomic="true">
+        {% for category, message in messages %}
+          <div class="flash flash--{{ category|e }}" role="{{ 'alert' if category in ['error', 'danger'] else 'status' }}">
+            <span>{{ message }}</span>
+            <button type="button" class="icon-button" data-dismiss-parent aria-label="Close notification">×</button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main id="main-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell site-footer__grid">
+      <div>
+        <strong>VentureBridge</strong>
+        <p>Treat profile recommendations as corrigible learning hypotheses, treat entrepreneurship scenarios as practice, not real-world predictions.</p>
+      </div>
+      <nav aria-label="Footer Navigation">
+        <a href="{{ url_for('transparency') }}">Methods and Transparency</a>
+        {% if viewer %}<a href="{{ url_for('data_controls') }}">View, Correct, and Delete Data</a>{% endif %}
+      </nav>
+      <p class="site-footer__boundary">LLMs may generate inaccurate content. For important real-world decisions, consult qualified teachers, legal, or industry professionals.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

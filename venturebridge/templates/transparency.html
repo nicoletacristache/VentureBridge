@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Methods, Data, and System Boundaries | VentureBridge{% endblock %}
+
+{% block content %}
+  <section class="transparency-hero">
+    <div class="shell narrow">
+      <p class="eyebrow">Methodology and Transparency</p>
+      <h1>What the system does, and clearly what it cannot do</h1>
+      <p class="lede">VentureBridge is an entrepreneurial teaching and process recording system awaiting further experimental validation. The LLM API is used for profile structuring, direction recommendation, main storyline event narration, mapping open decisions to whitelist actions, ECD process evidence encoding, and reflective feedback; an external rule engine independently calculates and saves numerical states, and the LLM has no authority to directly modify these values.</p>
+    </div>
+  </section>
+
+  <div class="shell transparency-layout">
+    <aside class="transparency-nav">
+      <nav aria-label="Table of Contents for this page">
+        <a href="#workflow">Processing Workflow</a>
+        <a href="#profile-method">Profile and MBTI</a>
+        <a href="#simulation-method">State Machine and Events</a>
+        <a href="#anchor-method">Shared Anchor Events</a>
+        <a href="#evidence-method">Five-Dimensional Process Evidence</a>
+        <a href="#data-method">Data and API</a>
+        <a href="#limitations">Limitations and Human Judgment</a>
+      </nav>
+    </aside>
+
+    <article class="transparency-content prose">
+      <section id="workflow">
+        <p class="eyebrow">01 · Processing Workflow</p>
+        <h2>From Input to Continuous Simulation</h2>
+        <ol class="method-steps">
+          <li><span>Input</span><div><h3>Minimized Data</h3><p>Learners actively fill in background, experience, skills, interests, resources, constraints, and entrepreneurial experience, and remove identity information before submission.</p></div></li>
+          <li><span>Profile</span><div><h3>Structured Draft with Evidence</h3><p>The LLM API extracts summaries, source snippets, confidence levels, and conflicts. Learners must be able to view and correct them.</p></div></li>
+          <li><span>Recommendation</span><div><h3>2–3 Learning Hypotheses</h3><p>The system explains the basis for direction, uncertainty, and practice focus; recommendations can be questioned, rejected, and resubmitted.</p></div></li>
+          <li><span>Simulation</span><div><h3>Rule State + Constrained Narration</h3><p>The LLM generates main storyline event narration based on the blueprint and visible state, maps open answers to whitelist actions, extracts process evidence, and generates reflective feedback; only the explicit rule engine is responsible for updating numerical resources.</p></div></li>
+        </ol>
+      </section>
+
+      <section id="profile-method">
+        <p class="eyebrow">02 · Learner Profile</p>
+        <h2>Profiles are editable; MBTI is merely a weak cue</h2>
+        <p>A profile is not a fixed personality label. The system should associate learner original text with extraction results, mark uncertainty, and retain corrected new versions. Recommendations must not be driven solely by a single personality type.</p>
+        <div class="boundary-grid">
+          <div><strong>System Can</strong><p>Summarize submitted experiences, interests, resources, and constraints, and point out contradictions or gaps in materials.</p></div>
+          <div><strong>System Should Not</strong><p>Assert real-world career fit, entrepreneurial potential, personality truth, or success probability based on MBTI or a single experience.</p></div>
+        </div>
+      </section>
+
+      <section id="simulation-method">
+        <p class="eyebrow">03 · Continuous Simulation</p>
+        <h2>LLM Writes Narration, Rules Determine State Transitions</h2>
+        <p>Numerical values such as cash, team, product, market evidence, reputation, and compliance are saved in an external state machine. Events can only reference allowed display states; after learners submit actions, the rule table calculates main storyline changes. LLM output must pass structural validation and cannot directly rewrite database values.</p>
+        <p>Open answers are first mapped by the LLM to one action code allowed by the current blueprint, while recording the model's self-reported classification confidence, mapping uncertainty, and alternative codes. Mapping may still fail; these values are uncalibrated, not correctness probabilities, and cannot turn rule state changes into real-world result predictions.</p>
+        <p>This improves trajectory auditability, but does not mean generated events equate to the real market. Event consequences are conventions within the teaching model, not business predictions.</p>
+      </section>
+
+      <section id="anchor-method">
+        <p class="eyebrow">04 · Shared Anchor Bridging</p>
+        <h2>Briefly Enter Common States Within Personalized Mainlines</h2>
+        <p>Predefined checkpoints use an auditable scheduler to deploy "Boardroom Stress Tests" at overlapping learner and time points. Anchor events run in isolated states, restoring the learner's mainline prior to entry upon completion.</p>
+        <dl class="definition-list">
+          <div><dt>Precise Common Version</dt><dd>Fixed state blueprints, information, and target evidence, used to maintain common tasks required for scale linkage.</dd></div>
+          <div><dt>Industry Surface Version</dt><dd>Maintain capability requirements and blueprints, only randomly changing industry surface contexts to preserve data for later testing of surface form differences.</dd></div>
+          <div><dt>Deployment Records</dt><dd>Save blueprints, forms, deployment probabilities, mainline path states, prompts, and model versions.</dd></div>
+        </dl>
+        <aside class="notice notice--measurement">
+          <strong>Important: Anchors Are Not Automatically Validated Scales</strong>
+          <p>Only if subsequent methodological experiments support equivalence, common support, and link stability can they be used for cross-path comparison. The current implementation is only responsible for correct deployment and recording, not claiming verification.</p>
+        </aside>
+      </section>
+
+      <section id="evidence-method">
+        <p class="eyebrow">05 · Process Evidence</p>
+        <h2>Five Coding Dimensions, Not Five Ability Conclusions</h2>
+        <div class="dimension-definition-grid">
+          <article><span>01</span><h3>Opportunity Definition and Assessment</h3><p>How to define problems, needs, and viable opportunities.</p></article>
+          <article><span>02</span><h3>Evidence Weighing and Falsifiability</h3><p>Whether facts and assumptions can be distinguished, and information that can change judgment can be proposed.</p></article>
+          <article><span>03</span><h3>Resource and Financial Allocation</h3><p>How to explain trade-offs, timing, and buffers under constraints.</p></article>
+          <article><span>04</span><h3>Action Planning and Adaptive Updates</h3><p>How to set actions, stop conditions, and revision trigger points.</p></article>
+          <article><span>05</span><h3>Team, Stakeholders, and Ethical Compliance</h3><p>How to identify multi-party impacts, responsibilities, and compliance boundaries.</p></article>
+        </div>
+        <p>The LLM can extract textual evidence according to explicit rubrics, but automatic coding may still drift, misjudge, or be influenced by phrasing. This system retains model, API, and prompt versions; their consistency, validity, and fairness belong to subsequent experiments and are not concluded in the current implementation.</p>
+      </section>
+
+      <section id="data-method">
+        <p class="eyebrow">06 · Data and API</p>
+        <h2>Minimized, Traceable, Deletable</h2>
+        <ul>
+          <li>API keys are read only from server environment variables, not entering web pages, prompts, or application logs.</li>
+          <li>Send minimized data required to complete current functions to model services, using de-identified aliases.</li>
+          <li>Record call purpose, model and prompt versions, parameters, status, duration, input summary hash, and structurally validated model outputs to support troubleshooting and auditing.</li>
+          <li>Learners can check and correct profiles, and delete local learning spaces and associated records.</li>
+        </ul>
+        <p>Specific deployments still require ethical and data protection reviews based on the institution, API provider terms, and applicable laws. Code-level controls cannot replace institutional responsibility.</p>
+      </section>
+
+      <section id="limitations">
+        <p class="eyebrow">07 · Known Limitations</p>
+        <h2>When to Stop Relying on the System</h2>
+        <ul class="warning-list">
+          <li><strong>Unreliable Facts or Rules:</strong> If events cite non-existent regulations, prices, or real-world entities, stop the current task and verify with the instructor.</li>
+          <li><strong>State Contradictions:</strong> If narration conflicts with page values, use explicit state as the record basis and report the issue.</li>
+          <li><strong>High-Risk Real Decisions:</strong> Financing, contracts, legal, medical, safety, or real employment decisions must seek qualified professional advice.</li>
+          <li><strong>Over-reliance:</strong> The system should promote evidence gathering and reflection, not replace autonomous judgment, field interviews, or team discussions.</li>
+        </ul>
+        <div class="callout-final">
+          <h3>Meaning of Current Deliverables</h3>
+          <p>This is a runnable and verifiable implementation of a methodology and teaching system. It has not executed methodological validation or educational application experiments, and cannot claim measurement validity, superiority over baselines, or improved learner capabilities based on this.</p>
+        </div>
+      </section>
+    </article>
+  </div>
+{% endblock %}

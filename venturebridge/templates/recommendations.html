@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field with context %}
+{% set recommendation_input = recommendations|default([]) %}
+{% set stored_recommendation = recommendation_record if recommendation_record is defined else recommendation_input %}
+{% set recommendation_payload = recommendation_input.get('recommendations_json', recommendation_input) if recommendation_input is mapping else recommendation_input %}
+{% set recommendation_items = recommendation_payload.get('recommendations', []) if recommendation_payload is mapping else recommendation_payload %}
+
+{% block title %}Choose a Venture Exploration Direction | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header page-header--single">
+      <div>
+        <p class="eyebrow">Step 3 / 3</p>
+        <h1>Select a Direction to Explore</h1>
+        <p class="lede">These directions are learning hypotheses generated based on your current profile, not career matches, investment advice, or conclusions about what is 'best for you.' You can select, question, or go back to refine your profile first.</p>
+      </div>
+    </header>
+
+    <div class="recommendation-toolbar">
+      <div class="notice">
+        <strong>How to Choose</strong>
+        <p>{{ recommendation_payload.get('choice_notice') if recommendation_payload is mapping and recommendation_payload.get('choice_notice') else "Prioritize the type of decision-making you wish to practice rather than treating the recommendation score as a probability of real-world success." }}</p>
+      </div>
+      <a class="button button--secondary" href="{{ url_for('profile_review') }}">Review or Edit Profile</a>
+    </div>
+
+    {% if recommendation_items %}
+      <form method="post" action="{{ url_for('start_simulation') }}" class="direction-form">
+        {{ csrf_field() }}
+        {% if recommendation_id is defined %}<input type="hidden" name="recommendation_id" value="{{ recommendation_id }}">{% elif stored_recommendation is mapping and stored_recommendation.get('id') %}<input type="hidden" name="recommendation_id" value="{{ stored_recommendation.get('id') }}">{% endif %}
+        <fieldset class="direction-choice-group">
+          <legend>Select a direction as the simulation path (Required)</legend>
+          <div class="recommendation-grid">
+          {% for rec in recommendation_items %}
+            <article class="recommendation-card">
+            <header>
+              <span class="recommendation-card__number">Exploration Direction {{ loop.index }}</span>
+              <h2>{{ rec.get('title', 'Unnamed Exploration Direction') }}</h2>
+              {% if rec.get('role') %}<p class="recommendation-card__role">Suggested Practice Role: {{ rec.get('role') }}</p>{% endif %}
+            </header>
+            {% set hypothesis = rec.get('exploration_hypothesis', rec.get('description')) %}
+            {% if hypothesis %}<p class="recommendation-card__description">{{ hypothesis }}</p>{% endif %}
+
+            <section aria-labelledby="rationale-{{ loop.index }}">
+              <h3 id="rationale-{{ loop.index }}">Why It's Worth Exploring</h3>
+              {% set rationales = rec.get('why_it_might_fit', rec.get('rationale', rec.get('reasons', []))) %}
+              {% if rationales is string %}
+                <p>{{ rationales }}</p>
+              {% elif rationales %}
+                <ul class="plain-list">
+                  {% for reason in rationales %}<li>{{ reason }}</li>{% endfor %}
+                </ul>
+              {% else %}
+                <p class="muted">System did not provide sufficient rationale; recommend not selecting now and returning to refine profile.</p>
+              {% endif %}
+            </section>
+
+            {% set counterarguments = rec.get('counterarguments', []) %}
+            {% if counterarguments %}
+              <section class="counterargument-box" aria-labelledby="counterargument-{{ loop.index }}">
+                <h3 id="counterargument-{{ loop.index }}">Reasons Against This Direction</h3>
+                <ul>{% for item in counterarguments %}<li>{{ item }}</li>{% endfor %}</ul>
+              </section>
+            {% endif %}
+
+            {% if rec.get('first_experiments') %}
+              <section aria-labelledby="first-experiments-{{ loop.index }}">
+                <h3 id="first-experiments-{{ loop.index }}">Low-Cost Steps to Validate First</h3>
+                <ol class="plain-list">{% for item in rec.get('first_experiments') %}<li>{{ item }}</li>{% endfor %}</ol>
+              </section>
+            {% endif %}
+
+            {% set uncertainties = rec.get('uncertainties', rec.get('uncertainty', [])) %}
+            <section class="uncertainty-box" aria-labelledby="uncertainty-{{ loop.index }}">
+              <h3 id="uncertainty-{{ loop.index }}">Areas to Question</h3>
+              {% if uncertainties is string %}
+                <p>{{ uncertainties }}</p>
+              {% elif uncertainties %}
+                <ul>
+                  {% for item in uncertainties %}<li>{{ item }}</li>{% endfor %}
+                </ul>
+              {% else %}
+                <p>No specific uncertainties listed currently; this does not mean the direction has been proven suitable for you.</p>
+              {% endif %}
+            </section>
+
+            {% if rec.get('training_focus') %}
+              <p class="training-focus"><strong>Simulation Practice Focus:</strong>{{ rec.get('training_focus') }}</p>
+            {% endif %}
+            {% if rec.get('mbti_influence') %}
+              <p class="small muted"><strong>MBTI Influence on This Direction:</strong>{{ {'none':'None','low':'Low'}.get(rec.get('mbti_influence'), rec.get('mbti_influence')) }}. Direction confidence only indicates support from current profile evidence for 'worth exploring,' not real-world success probability.</p>
+            {% endif %}
+
+              <label class="direction-selector">
+                <input type="radio" name="direction_id" value="{{ rec.get('direction_id', rec.get('id', loop.index0)) }}" required>
+                <span>Select '{{ rec.get('title', 'This Direction') }}'</span>
+              </label>
+            </article>
+          {% endfor %}
+
+          <article class="recommendation-card recommendation-card--custom">
+            <header>
+              <span class="recommendation-card__number">Alternative Direction</span>
+              <h2>Propose Your Own Direction to Explore</h2>
+            </header>
+            <p class="recommendation-card__description">Recommendations are not constraints. You can build the simulation path using your own questions or industry context; the system will still apply the same state rules and event boundaries.</p>
+            <label class="direction-selector">
+              <input type="radio" name="direction_id" value="__custom__" required>
+              <span>Select Self-Proposed Alternative Direction</span>
+            </label>
+            <div class="field custom-direction-field">
+              <label for="custom-direction">Alternative Direction and Questions You Wish to Practice</label>
+              <textarea id="custom-direction" name="custom_direction" rows="6" maxlength="600" data-custom-direction
+                        aria-describedby="custom-direction-help custom-direction-count" data-char-count></textarea>
+              <div class="field-meta">
+                <p class="field-help" id="custom-direction-help">Do not enter real trade secrets or personal identity information. This field is required only if you select this option.</p>
+                <span id="custom-direction-count" class="char-count" aria-live="polite"></span>
+              </div>
+            </div>
+          </article>
+          </div>
+        </fieldset>
+
+        <div class="form-actions form-actions--sticky direction-form__submit">
+          <p>Selection only determines the starting context for the instructional simulation; it does not indicate the system believes this direction suits you or has real-world success probability.</p>
+          <button class="button button--large" type="submit" data-submit-label="Establishing path...">Confirm Selection and Establish Path</button>
+        </div>
+      </form>
+    {% else %}
+      <section class="panel empty-panel">
+        <h2>No Directions Available Temporarily</h2>
+        <p>This may be because the profile is not yet confirmed, the LLM API is temporarily unavailable, or structured output failed validation. The system will not replace failed recommendations with static results.</p>
+        <a class="button button--secondary" href="{{ url_for('profile_review') }}">Return to Check Profile</a>
+      </section>
+    {% endif %}
+
+    <aside class="recommendation-boundary">
+      <h2>You Always Retain the Right to Choose</h2>
+      <p>Selection only determines the starting context for the instructional simulation. You can exit, return to the profile page to update information, or question the assumptions given by the system in subsequent events. LLM-generated content cannot replace real-world industry research.</p>
+    </aside>
+  </div>
+{% endblock %}

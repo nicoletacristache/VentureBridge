@@ -1,0 +1,77 @@
+{% macro csrf_field() -%}
+  {% if csrf_token is defined %}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% endif %}
+{%- endmacro %}
+
+{% macro field_error(name) -%}
+  {% if errors is defined and errors and errors.get(name) %}
+    <p class="field-error" id="{{ name }}-error" role="alert">{{ errors.get(name) }}</p>
+  {% endif %}
+{%- endmacro %}
+
+{% macro anchor_badge(kind, compact=false) -%}
+  {% if kind == 'exact_anchor' %}
+    <span class="event-badge event-badge--anchor" aria-label="Exact Common Anchor Event">
+      {{ 'Common Anchor' if compact else 'Board Stress Test · Exact Common Anchor' }}
+    </span>
+  {% elif kind == 'surface_anchor' %}
+    <span class="event-badge event-badge--surface" aria-label="Industry Surface Version Anchor Event">
+      {{ 'Surface Anchor' if compact else 'Board Stress Test · Industry Surface Version' }}
+    </span>
+  {% else %}
+    <span class="event-badge event-badge--main">{{ 'Main Thread' if compact else 'Personalized Startup Main Thread' }}</span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro state_grid(items, heading='Current Visible State') -%}
+  <section class="state-panel" aria-labelledby="state-panel-title">
+    <div class="section-heading section-heading--compact">
+      <div>
+        <p class="eyebrow">Rule State Machine</p>
+        <h2 id="state-panel-title">{{ heading }}</h2>
+      </div>
+      <p class="section-note">Values are maintained by explicit rules, not arbitrarily rewritten by the LLM.</p>
+    </div>
+    {% if items %}
+      <div class="state-grid">
+        {% if items is mapping %}
+          {% set state_labels = {'cash':'Cash (Instructional Unit)','team':'Team Status','product':'Product Progress','market_evidence':'Market Evidence','reputation':'Reputation','compliance':'Compliance'} %}
+          {% for key, value in items.items() %}
+            <article class="state-item">
+              <div class="state-item__header">
+                <span>{{ state_labels.get(key, key) }}</span>
+                <strong>{{ value }}</strong>
+              </div>
+              {% if key != 'cash' %}<meter min="0" max="100" value="{{ value }}">{{ value }} / 100</meter>{% endif %}
+            </article>
+          {% endfor %}
+        {% else %}
+          {% for item in items %}
+            <article class="state-item">
+              <div class="state-item__header">
+                <span>{{ item.label }}</span>
+                <strong>{{ item.display_value|default(item.value) }}</strong>
+              </div>
+              {% if item.minimum is defined and item.maximum is defined and item.value is defined %}
+                <meter min="{{ item.minimum }}" max="{{ item.maximum }}" value="{{ item.value }}">
+                  {{ item.value }} / {{ item.maximum }}
+                </meter>
+              {% endif %}
+              {% if item.note %}<p>{{ item.note }}</p>{% endif %}
+            </article>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% else %}
+      <p class="empty-state">No state available to display yet. After starting the simulation, the system will present visible resources and constraints here.</p>
+    {% endif %}
+  </section>
+{%- endmacro %}
+
+{% macro process_notice() -%}
+  <aside class="notice notice--measurement" aria-label="Process Evidence Explanation">
+    <strong>About Five-Dimensional Process Evidence</strong>
+    <p>The five-dimensional codes recorded by the system are learning process clues pending subsequent verification, intended to support reflection; they are not conclusions on ability, grades, nor do they predict real-world startup success or failure.</p>
+  </aside>
+{%- endmacro %}

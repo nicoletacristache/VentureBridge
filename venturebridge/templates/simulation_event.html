@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import anchor_badge, csrf_field, process_notice, state_grid with context %}
+{% set delivery_record = delivery if delivery is defined else event|default({}) %}
+{% set event_container = delivery_record.get('event_json', {}) %}
+{% set e = delivery_record.get('content', event_container.get('content', event_container if event_container else delivery_record)) %}
+{% set scheduler = delivery_record.get('domain_event', event_container.get('domain_event', delivery_record.get('scheduler_json', {}))) %}
+{% set event_kind = delivery_record.get('event_kind', e.get('event_kind', scheduler.get('event_kind', 'main'))) %}
+{% set ecd_labels = {'opportunity_evaluation':'Opportunity Definition and Evaluation','opportunity_framing':'Opportunity Definition and Evaluation','evidence_falsifiability':'Evidence Weighting and Falsifiability','resource_financial_allocation':'Resource and Financial Allocation','resource_finance':'Resource and Financial Allocation','uncertainty_adaptation':'Action Planning and Adaptation Under Uncertainty','adaptive_action':'Action Planning and Adaptation Under Uncertainty','stakeholder_ethics_compliance':'Team, Stakeholders, and Ethical Compliance','stakeholder_ethics':'Team, Stakeholders, and Ethical Compliance'} %}
+
+{% block title %}Entrepreneurial Decision Event | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell event-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ url_for('simulation_dashboard') }}">Simulation Overview</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Event {{ delivery_record.get('turn_no', e.get('turn_no', '')) }}</span>
+    </nav>
+
+    <header class="event-header event-header--{{ event_kind }}">
+      <div class="event-header__meta">
+        {{ anchor_badge(event_kind) }}
+        {% if delivery_record.get('blueprint_id', e.get('blueprint_id')) %}<span>Blueprint {{ delivery_record.get('blueprint_id', e.get('blueprint_id')) }}</span>{% endif %}
+        {% if e.get('time_label') %}<span>{{ e.get('time_label') }}</span>{% endif %}
+      </div>
+      <h1>{{ e.get('title', 'Entrepreneurial Decision Event') }}</h1>
+      {% set learning_focus = e.get('learning_focus', scheduler.get('target_dimensions', [])) %}
+      {% if learning_focus %}
+        <p class="event-focus"><strong>Focus of this exercise:</strong>
+          {% if learning_focus is string %}{{ ecd_labels.get(learning_focus, learning_focus) }}{% else %}{% for focus in learning_focus %}{{ ecd_labels.get(focus, focus) }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}
+        </p>
+      {% endif %}
+    </header>
+
+    {% if event_kind in ['exact_anchor', 'surface_anchor'] %}
+      <aside class="anchor-mode" aria-labelledby="anchor-mode-title">
+        <div class="anchor-mode__icon" aria-hidden="true">A</div>
+        <div>
+          <h2 id="anchor-mode-title">You have entered an isolated boardroom stress test</h2>
+          <p>Below is the visible state for this anchor event. Upon submission, the system saves the anchor event record and restores the personalized main storyline prior to entry; numerical consequences of the anchor event will not overwrite the main storyline.</p>
+          {% if event_kind == 'surface_anchor' %}<p>This is the industry surface version deployed according to currently recorded scheduling rules; it only possesses the claimed queue-level balance when a frozen queue plan is enabled, and surface changes do not imply this version has been proven equivalent to other versions.</p>{% endif %}
+        </div>
+      </aside>
+    {% endif %}
+
+    <div class="event-layout">
+      <article class="event-brief">
+        <section aria-labelledby="situation-title">
+          <p class="eyebrow">Situation</p>
+          <h2 id="situation-title">What is happening now</h2>
+          <div class="event-narrative">{{ e.get('narrative', e.get('situation', 'Event content is temporarily unavailable. Please return to the overview and try again.')) }}</div>
+        </section>
+
+        {% set facts = e.get('information_cues', e.get('facts', e.get('available_information', []))) %}
+        {% if facts %}
+          <section class="fact-section" aria-labelledby="facts-title">
+            <h2 id="facts-title">Information Currently Available</h2>
+            <dl class="fact-grid">
+              {% for fact in facts %}
+                <div>
+                  <dt>{{ fact.get('label', 'Information') if fact is mapping else 'Information' }}</dt>
+                  <dd>{{ fact.get('value', '') if fact is mapping else fact }}</dd>
+                </div>
+              {% endfor %}
+            </dl>
+          </section>
+        {% endif %}
+
+        {% if e.get('constraints') %}
+          <section class="constraint-section" aria-labelledby="constraints-title">
+            <h2 id="constraints-title">Boundaries and Constraints</h2>
+            <ul>
+              {% for constraint in e.get('constraints') %}<li>{{ constraint }}</li>{% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+
+        {% if e.get('uncertainties') %}
+          <section class="constraint-section" aria-labelledby="uncertainties-title">
+            <h2 id="uncertainties-title">Undetermined Information</h2>
+            <ul>{% for item in e.get('uncertainties') %}<li>{{ item }}</li>{% endfor %}</ul>
+          </section>
+        {% endif %}
+
+        <section class="decision-question" aria-labelledby="decision-question-title">
+          <p class="eyebrow">Decision Required</p>
+          <h2 id="decision-question-title">{{ e.get('decision_prompt', e.get('question', 'What action will you take? Why?')) }}</h2>
+          {% if e.get('decision_deadline') %}<p>In-scenario decision deadline: {{ e.get('decision_deadline') }}</p>{% endif %}
+        </section>
+      </article>
+
+      <aside class="event-state">
+        {{ state_grid(state_items|default(delivery_record.get('visible_state_json', scheduler.get('visible_state', {}))), 'Visible State for This Event') }}
+        <div class="visibility-note">
+          <strong>State Visibility</strong>
+          <p>Answer only based on information provided on the page. States not displayed should not be assumed by the model or learner.</p>
+        </div>
+        {% if e.get('guardrail_notice') %}<div class="notice notice--warning"><strong>Event Boundaries</strong><p>{{ e.get('guardrail_notice') }}</p></div>{% endif %}
+      </aside>
+    </div>
+
+    <form method="post" action="{{ url_for('submit_response') }}" class="response-form">
+      {{ csrf_field() }}
+      {% if delivery_record.get('id', e.get('id')) %}<input type="hidden" name="delivery_id" value="{{ delivery_record.get('id', e.get('id')) }}">{% endif %}
+      <div class="response-form__header">
+        <div>
+          <p class="eyebrow">Your Decision Record</p>
+          <h2>Make a clear choice and write checkable reasoning</h2>
+        </div>
+        <p>The system will save this original text, structured action codes, and the revision conditions you filled out. Do not enter personal or third-party identity information.</p>
+      </div>
+
+      {% set actions = e.get('actions', scheduler.get('allowed_actions', e.get('allowed_actions', []))) %}
+      {% if actions %}
+        <section class="action-choices" aria-labelledby="strategy-levers-title">
+          <h3 id="strategy-levers-title">Strategy Levers to Consider</h3>
+          <p class="small muted">This is not a single-choice question. Please specify your specific decision in the open text; the system will subsequently map rule state transitions only within the following whitelist actions and record mapping uncertainty.</p>
+          <div class="choice-grid">
+            {% for action in actions %}
+              <article class="choice-card choice-card--readonly">
+                <span class="choice-card__number" aria-hidden="true">{{ loop.index }}</span>
+                <span>
+                  <strong>{{ action.get('label', action) if action is mapping else action }}</strong>
+                  {% if action is mapping and action.get('description') %}<small>{{ action.get('description') }}</small>{% endif %}
+                </span>
+              </article>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+      <div class="field">
+        <label for="decision-text">Specific Decision <span aria-hidden="true">*</span></label>
+        <textarea id="decision-text" name="decision_text" rows="5" maxlength="2000" required data-char-count
+                  aria-describedby="decision-help decision-count"></textarea>
+        <div class="field-meta">
+          <p class="field-help" id="decision-help">Specify what to do, the sequence, and stop or adjustment conditions.</p>
+          <span id="decision-count" class="char-count" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rationale-text">Rationale and Evidence Weighting <span aria-hidden="true">*</span></label>
+        <textarea id="rationale-text" name="rationale_text" rows="6" maxlength="2400" required data-char-count
+                  aria-describedby="rationale-help rationale-count"></textarea>
+        <div class="field-meta">
+          <p class="field-help" id="rationale-help">Distinguish between known facts, assumptions, and uncertainties; explain why other paths were not chosen.</p>
+          <span id="rationale-count" class="char-count" aria-live="polite"></span>
+        </div>
+      </div>
+
+      <div class="field-grid field-grid--2">
+        <div class="field">
+          <label for="information-requests">What additional information would you like?</label>
+          <textarea id="information-requests" name="information_requests" rows="4" maxlength="1200"
+                    placeholder="List information that could falsify key assumptions or change the decision."></textarea>
+        </div>
+        <div class="field">
+          <label for="revision-text">Under what circumstances would you revise the plan?</label>
+          <textarea id="revision-text" name="revision_text" rows="4" maxlength="1200"
+                    placeholder="For example: If interview evidence does not meet certain conditions within two weeks..."></textarea>
+        </div>
+      </div>
+
+      {{ process_notice() }}
+
+      <div class="form-actions form-actions--sticky">
+        <p>Submission will advance the event and cannot overwrite the original response; the revision conditions filled out this time will be retained with the response. LLM feedback still requires your judgment.</p>
+        <div class="button-row">
+          <a class="button button--quiet" href="{{ url_for('simulation_dashboard') }}">Skip for now</a>
+          <button class="button button--large" type="submit" data-submit-label="Validating and advancing...">Submit Decision</button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

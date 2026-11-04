@@ -65,17 +65,6 @@ def _sha256(path: Path) -> str:
             digest.update(block)
     return digest.hexdigest()
 
-def _ratings_input_paths(data_dir: Path) -> list[Path]:
-    """Use the original CSV when available, otherwise require both ordered parts."""
-    original = data_dir / 'ratings_long.csv'
-    if original.is_file():
-        return [original]
-    parts = [data_dir / f'ratings_long_part{index:02d}.csv' for index in (1, 2)]
-    for path in parts:
-        if not path.is_file():
-            raise FileNotFoundError(f'Missing ratings input: {path}; both CSV parts are required')
-    return parts
-
 def _ordinal_signal(values: pd.Series | np.ndarray) -> np.ndarray:
     lookup = np.array([-1.55, -0.7, 0.0, 0.7, 1.55], dtype=float)
     array = np.asarray(values, dtype=float)
@@ -121,7 +110,7 @@ def _build_multirater_observations(observations: pd.DataFrame, ratings: pd.DataF
     required = {*keys, 'rating_id', 'rating_round', 'rater_id', 'rating_time_id', 'version_id', 'score', 'is_missing'}
     missing = sorted(required - set(ratings.columns))
     if missing:
-        raise ValueError(f'Ratings input is missing columns: {missing}')
+        raise ValueError(f'ratings_long.csv is missing columns: {missing}')
     if len(ratings) != 151200:
         raise ValueError(f'Expected 151,200 rating rows, found {len(ratings):,}')
     counts = ratings.groupby(keys).size()
@@ -1073,9 +1062,9 @@ def main() -> None:
     args.results_dir.mkdir(parents=True, exist_ok=True)
     observation_path = args.data_dir / 'trajectory_observations.csv'
     ability_path = args.data_dir / 'ability_truth_long.csv'
-    ratings_paths = _ratings_input_paths(args.data_dir)
+    ratings_path = args.data_dir / 'ratings_long.csv'
     facet_truth_path = args.data_dir / 'facet_truth.csv'
-    for required_path in (observation_path, *ratings_paths, facet_truth_path):
+    for required_path in (observation_path, ratings_path, facet_truth_path):
         if not required_path.exists():
             raise FileNotFoundError(required_path)
     observations = pd.read_csv(observation_path)
@@ -1086,7 +1075,7 @@ def main() -> None:
     dataset_versions = observations['dataset_version'].astype(str).unique().tolist()
     if len(dataset_versions) != 1:
         raise ValueError(f'Expected one dataset_version, found {dataset_versions}')
-    ratings = pd.concat([pd.read_csv(path) for path in ratings_paths], ignore_index=True)
+    ratings = pd.read_csv(ratings_path)
     facet_truth = pd.read_csv(facet_truth_path)
     multirater_observations = _build_multirater_observations(observations, ratings, facet_truth)
     weekly_truth = _normalize_ability_truth(ability_path, observations)
@@ -1192,7 +1181,7 @@ def main() -> None:
     stress.to_csv(args.results_dir / 'measurement_stress_boundaries.csv', index=False)
     tuning = pd.DataFrame(tuning_rows)
     tuning.to_csv(args.results_dir / 'measurement_validation_tuning.csv', index=False)
-    config = {'analysis_version': 'measurement-validation-calibrated-multirater-linear-turn-map-v5', 'dataset_version': dataset_versions[0], 'seed': SEED, 'estimands': ['week4_end_five_dimensional_ability', 'week1_to_week4_change'], 'latent_state_model': {'type': 'exact-turn linear level-and-slope trajectory', 'turns': list(TURNS), 'reported_week_end_turns': WEEK_END_TURNS, 'level_prior_strength': DYNAMIC_PRIOR_STRENGTH, 'slope_penalty_grid': list(SMOOTHING_GRID)}, 'ordinal_approximation': {'type': 'penalized Gaussian/MAP approximation to five-category PCM signal', 'category_locations': [-1.55, -0.7, 0.0, 0.7, 1.55], 'not_stan_fit': True}, 'split_counts': {key: len(value) for key, value in learner_ids.items()}, 'multirater_rows_by_split': {key: len(value) for key, value in multirater_obs.items()}, 'smoothing_grid': list(SMOOTHING_GRID), 'ridge_alpha_grid': list(RIDGE_ALPHA_GRID), 'anchor_weight_grid': list(ANCHOR_WEIGHT_GRID), 'selected_smoothing': selected_smooth, 'selected_ridge_alpha': selected_ridge_alpha, 'selected_anchor_weight': selected_anchor_weight, 'ridge_level': RIDGE_LEVEL, 'ridge_global': RIDGE_GLOBAL, 'anchor_weight': ANCHOR_WEIGHT, 'final_state_rule_weights': dict(zip(STATE_COLUMNS, FinalStateBaseline.STATE_WEIGHTS.tolist())), 'bootstrap_replicates': N_BOOTSTRAP, 'methods': list(METHOD_ORDER), 'ablations': list(ablation_specs) + ['no_anchor_dynamic', 'static_multifacet'], 'stress_scenarios': sorted(stress['scenario'].unique()), 'input_files': {str(observation_path): _sha256(observation_path), str(ability_path): _sha256(ability_path) if ability_path.exists() else None, **{str(path): _sha256(path) for path in ratings_paths}, str(facet_truth_path): _sha256(facet_truth_path)}, 'software': {'python': platform.python_version(), 'numpy': np.__version__, 'pandas': pd.__version__, 'scipy': scipy.__version__, 'scikit_learn': sklearn.__version__, 'matplotlib': matplotlib.__version__}, 'fit_diagnostics': {dimension: model.fit_diagnostics for dimension, model in full_model.models.items()}, 'latent_scale_alignment': full_model.scale.parameters}
+    config = {'analysis_version': 'measurement-validation-calibrated-multirater-linear-turn-map-v5', 'dataset_version': dataset_versions[0], 'seed': SEED, 'estimands': ['week4_end_five_dimensional_ability', 'week1_to_week4_change'], 'latent_state_model': {'type': 'exact-turn linear level-and-slope trajectory', 'turns': list(TURNS), 'reported_week_end_turns': WEEK_END_TURNS, 'level_prior_strength': DYNAMIC_PRIOR_STRENGTH, 'slope_penalty_grid': list(SMOOTHING_GRID)}, 'ordinal_approximation': {'type': 'penalized Gaussian/MAP approximation to five-category PCM signal', 'category_locations': [-1.55, -0.7, 0.0, 0.7, 1.55], 'not_stan_fit': True}, 'split_counts': {key: len(value) for key, value in learner_ids.items()}, 'multirater_rows_by_split': {key: len(value) for key, value in multirater_obs.items()}, 'smoothing_grid': list(SMOOTHING_GRID), 'ridge_alpha_grid': list(RIDGE_ALPHA_GRID), 'anchor_weight_grid': list(ANCHOR_WEIGHT_GRID), 'selected_smoothing': selected_smooth, 'selected_ridge_alpha': selected_ridge_alpha, 'selected_anchor_weight': selected_anchor_weight, 'ridge_level': RIDGE_LEVEL, 'ridge_global': RIDGE_GLOBAL, 'anchor_weight': ANCHOR_WEIGHT, 'final_state_rule_weights': dict(zip(STATE_COLUMNS, FinalStateBaseline.STATE_WEIGHTS.tolist())), 'bootstrap_replicates': N_BOOTSTRAP, 'methods': list(METHOD_ORDER), 'ablations': list(ablation_specs) + ['no_anchor_dynamic', 'static_multifacet'], 'stress_scenarios': sorted(stress['scenario'].unique()), 'input_files': {str(observation_path): _sha256(observation_path), str(ability_path): _sha256(ability_path) if ability_path.exists() else None, str(ratings_path): _sha256(ratings_path), str(facet_truth_path): _sha256(facet_truth_path)}, 'software': {'python': platform.python_version(), 'numpy': np.__version__, 'pandas': pd.__version__, 'scipy': scipy.__version__, 'scikit_learn': sklearn.__version__, 'matplotlib': matplotlib.__version__}, 'fit_diagnostics': {dimension: model.fit_diagnostics for dimension, model in full_model.models.items()}, 'latent_scale_alignment': full_model.scale.parameters}
     _write_json(args.predictions_dir / 'measurement_run_config.json', config)
     _make_plots(args.results_dir, metrics, bootstrap, test_with_intervals, parameter, ablation_metrics)
     summary_metrics = metrics.loc[metrics['dimension'].eq('ALL')][['method', 'estimand', 'rmse', 'mae', 'bias', 'spearman', 'coverage_95']]

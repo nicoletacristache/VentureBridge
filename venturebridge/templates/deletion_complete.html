@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Deletion Complete | VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell completion-page">
+    <div class="completion-page__mark" aria-hidden="true">✓</div>
+    <div>
+      <p class="eyebrow">Deletion Complete</p>
+      <h1>Learning space and associated data have been deleted</h1>
+      <p class="lede">The current session has ended. This system cannot restore deleted profiles, recommendations, simulations, and answer records.</p>
+      {% if receipt %}<p class="request-id">Deletion Receipt: <code>{{ receipt }}</code></p>{% endif %}
+      <p>The receipt only confirms that the deletion operation was accepted by the application and does not contain your learning materials. Independent security records that the deploying institution is legally required to retain remain subject to their data policy.</p>
+      <a class="button" href="{{ url_for('home') }}">Return to Home</a>
+    </div>
+  </div>
+{% endblock %}
