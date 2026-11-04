@@ -1,9 +1,8 @@
-[README.md](https://github.com/user-attachments/files/34360294/README.md)
 # VentureBridge
 
 VentureBridge is an entrepreneurship education simulation system built with Flask and an LLM API. It provides learner profiles, recommendations for entrepreneurial directions, ongoing venture scenarios, decision feedback, simulation history, and user data export and deletion.
 
-This repository contains only application source code, page templates, static assets, runtime requirements, and the built-in event rules required by the system. `venturebridge/data/blueprints.json` contains static rule definitions, with no user records or experimental results. The application creates a local database on first startup.
+This repository contains application source code, page templates, static assets, runtime requirements, built-in event rules, and a separate method-validation package with benchmark inputs, comparison code, and saved results. `venturebridge/data/blueprints.json` contains static rule definitions, with no user records or experimental results. The application creates a local database on first startup.
 
 ## Requirements and Installation
 
@@ -62,6 +61,14 @@ venturebridge/               Application logic
   static/                    CSS and JavaScript
   templates/                 Page templates
 ```
+
+## Method Validation
+
+See [the method-validation guide](method_validation/README.md) for dataset preparation, comparison methods, dependencies, and result inspection. The data availability statement is in [DATA_AVAILABILITY.md](DATA_AVAILABILITY.md); source and scope are documented in [PROVENANCE.md](method_validation/PROVENANCE.md).
+
+## License
+
+See [LICENSE](LICENSE) for the repository's MIT license.
 
 ## Repository Scope
 
