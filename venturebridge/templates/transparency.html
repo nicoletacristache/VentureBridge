@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}方法、数据与系统边界｜VentureBridge{% endblock %}
+
+{% block content %}
+  <section class="transparency-hero">
+    <div class="shell narrow">
+      <p class="eyebrow">方法与透明度</p>
+      <h1>系统做什么，也说清楚它不能做什么</h1>
+      <p class="lede">VentureBridge 是一套待后续实验验证的创业教学与过程记录系统。LLM API 用于画像结构化、方向推荐、主线事件叙事、开放决策到白名单行动的映射、ECD 过程证据编码和反思反馈；外置规则引擎独立计算并保存数值状态，LLM 无权直接修改这些数值。</p>
+    </div>
+  </section>
+
+  <div class="shell transparency-layout">
+    <aside class="transparency-nav">
+      <nav aria-label="本页目录">
+        <a href="#workflow">处理流程</a>
+        <a href="#profile-method">画像与 MBTI</a>
+        <a href="#simulation-method">状态机与事件</a>
+        <a href="#anchor-method">共同锚事件</a>
+        <a href="#evidence-method">五维过程证据</a>
+        <a href="#data-method">数据与 API</a>
+        <a href="#limitations">限制与人工判断</a>
+      </nav>
+    </aside>
+
+    <article class="transparency-content prose">
+      <section id="workflow">
+        <p class="eyebrow">01 · 处理流程</p>
+        <h2>从输入到连续模拟</h2>
+        <ol class="method-steps">
+          <li><span>输入</span><div><h3>最小化资料</h3><p>学习者主动填写背景、经历、技能、兴趣、资源、约束和创业经验，并在提交前去除身份信息。</p></div></li>
+          <li><span>画像</span><div><h3>带证据的结构化草稿</h3><p>LLM API 提取概括、来源片段、置信度和冲突。学习者必须能够查看和修正。</p></div></li>
+          <li><span>推荐</span><div><h3>2—3 个学习假设</h3><p>系统说明方向依据、不确定性与练习焦点；推荐可以被质疑、拒绝和改选。</p></div></li>
+          <li><span>模拟</span><div><h3>规则状态 + 受约束叙事</h3><p>LLM 根据蓝图与可见状态生成主线事件叙事，把开放回答映射到白名单行动并提取过程证据、生成反思反馈；显式规则引擎才负责更新数值资源。</p></div></li>
+        </ol>
+      </section>
+
+      <section id="profile-method">
+        <p class="eyebrow">02 · 学习者画像</p>
+        <h2>画像可编辑，MBTI 只是一条弱线索</h2>
+        <p>画像不是固定人格标签。系统应把学习者原文与提取结果关联起来，标注不确定性，并保留修正后的新版本。推荐不得仅由单一人格类型驱动。</p>
+        <div class="boundary-grid">
+          <div><strong>系统可以</strong><p>概括已提交的经历、兴趣、资源和约束，提示材料中的矛盾或缺口。</p></div>
+          <div><strong>系统不应</strong><p>由 MBTI 或一段经历断言现实职业适配、创业潜力、人格真值或成功概率。</p></div>
+        </div>
+      </section>
+
+      <section id="simulation-method">
+        <p class="eyebrow">03 · 连续模拟</p>
+        <h2>LLM 写叙事，规则决定状态转移</h2>
+        <p>现金、团队、产品、市场证据、信誉与合规等数值保存在外置状态机。事件只能引用允许展示的状态，学习者提交行动后，由规则表计算主线变化。LLM 输出必须通过结构校验，不能直接改写数据库数值。</p>
+        <p>开放回答会先由 LLM 映射到当前蓝图允许的一个行动代码，同时记录模型自报分类把握、映射不确定性和替代代码。映射仍可能出错；这些值未经校准，不是正确概率，也不能把规则状态变化变成现实结果预测。</p>
+        <p>这能提高轨迹的可审计性，但不意味着生成事件等同于现实市场。事件后果是教学模型中的约定，不是商业预测。</p>
+      </section>
+
+      <section id="anchor-method">
+        <p class="eyebrow">04 · 共锚桥接</p>
+        <h2>在个性化主线中短时进入共同状态</h2>
+        <p>预设检查点使用可审计调度器，在重叠的学习者与时间点上投放“董事会压力测试”。锚事件在隔离状态中运行，结束后恢复学习者进入前的主线。</p>
+        <dl class="definition-list">
+          <div><dt>精确共同版本</dt><dd>固定状态蓝图、信息与目标证据，用于保留量尺链接所需的共同任务。</dd></div>
+          <div><dt>行业表面版本</dt><dd>保持能力要求与蓝图，仅随机改变行业表面语境，为后续检验表面形式差异保留数据。</dd></div>
+          <div><dt>投放记录</dt><dd>保存蓝图、形式、投放概率、主线路径状态、提示词与模型版本。</dd></div>
+        </dl>
+        <aside class="notice notice--measurement">
+          <strong>重要：锚点不是自动有效的标尺</strong>
+          <p>只有后续方法实验支持等值性、共同支持与链接稳定性，才可能用于跨路径比较。当前实现只负责正确投放与记录，不声称已经验证。</p>
+        </aside>
+      </section>
+
+      <section id="evidence-method">
+        <p class="eyebrow">05 · 过程证据</p>
+        <h2>五个编码维度，不是五项能力定论</h2>
+        <div class="dimension-definition-grid">
+          <article><span>01</span><h3>机会界定与评估</h3><p>如何界定问题、需求与可行机会。</p></article>
+          <article><span>02</span><h3>证据权衡与可证伪性</h3><p>能否区分事实、假设，并提出可改变判断的信息。</p></article>
+          <article><span>03</span><h3>资源与财务配置</h3><p>如何在约束下说明取舍、时序和缓冲。</p></article>
+          <article><span>04</span><h3>行动规划与适应更新</h3><p>如何设定行动、停止条件与修订触发点。</p></article>
+          <article><span>05</span><h3>团队、利益相关者与伦理合规</h3><p>如何识别多方影响、责任和合规边界。</p></article>
+        </div>
+        <p>LLM 可按明确量规提取文本证据，但自动编码仍可能漂移、误判或受表述方式影响。本系统保留模型、API 和提示词版本；其一致性、效度与公平性属于后续实验，不在当前实现中作结论。</p>
+      </section>
+
+      <section id="data-method">
+        <p class="eyebrow">06 · 数据与 API</p>
+        <h2>最小化、可追溯、可删除</h2>
+        <ul>
+          <li>API 密钥只从服务器环境变量读取，不进入网页、提示词或应用日志。</li>
+          <li>向模型服务发送完成当前功能所需的最小化资料，并使用去标识化别名。</li>
+          <li>记录调用用途、模型和提示词版本、参数、状态、耗时、输入摘要哈希及经结构校验的模型输出，以支持排错和审计。</li>
+          <li>学习者可以检查和更正画像，并删除本地学习空间及关联记录。</li>
+        </ul>
+        <p>具体部署仍需依据所在机构、API 供应商条款和适用法律完成伦理与数据保护审查。代码层面的控制不能替代制度责任。</p>
+      </section>
+
+      <section id="limitations">
+        <p class="eyebrow">07 · 已知限制</p>
+        <h2>何时应停止依赖系统</h2>
+        <ul class="warning-list">
+          <li><strong>事实或规则不可靠：</strong>若事件引用不存在的法规、价格或现实主体，应停止当前任务并向教师核实。</li>
+          <li><strong>状态矛盾：</strong>若叙事与页面数值冲突，以显式状态为记录依据，并报告问题。</li>
+          <li><strong>高风险现实决定：</strong>融资、合同、法律、医疗、安全或真实就业决定必须寻求合格专业人员意见。</li>
+          <li><strong>过度依赖：</strong>系统应促进提出证据与反思，不应代替自主判断、实地访谈或团队讨论。</li>
+        </ul>
+        <div class="callout-final">
+          <h3>当前交付物的含义</h3>
+          <p>这是一个可运行、可继续验证的方法与教学系统实现。它没有执行方法验证或教育应用实验，不能据此声称测量有效、比基线更好，或已经改善学习者能力。</p>
+        </div>
+      </section>
+    </article>
+  </div>
+{% endblock %}

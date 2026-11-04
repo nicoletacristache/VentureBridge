@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field with context %}
+{% set form = form if form is defined else (request.form if request is defined and request.method == 'POST' else {}) %}
+
+{% block title %}VentureBridge｜可修正、可追溯的创业模拟{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+  {% if new_access_code %}
+    <section class="access-code-panel" aria-labelledby="access-code-title">
+      <div class="shell access-code-panel__inner">
+        <div>
+          <p class="eyebrow">仅显示这一次</p>
+          <h1 id="access-code-title">保存你的访问码</h1>
+          <p>服务器只保存不可逆摘要，无法替你找回原访问码。请保存到可信的密码管理器，不要截图转发。</p>
+        </div>
+        <div class="access-code-box">
+          <code>{{ new_access_code }}</code>
+          <button class="button button--secondary" type="button" data-copy-value="{{ new_access_code|e }}">复制访问码</button>
+        </div>
+        <a class="button button--large" href="{{ url_for('onboarding') }}">我已保存，继续建立画像</a>
+      </div>
+    </section>
+  {% endif %}
+  <section class="hero">
+    <div class="shell hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">个性化学习 × 共同锚事件</p>
+        <h1>在连续创业情境里<br>练习有依据的决策</h1>
+        <p class="lede">先形成可编辑的学习者画像，再探索创业方向。你的选择会改变后续主线；阶段性的共同锚事件帮助保留跨路径可比所需的记录。</p>
+        <div class="hero__actions">
+          <a class="button button--large" href="#begin">建立学习空间</a>
+          <a class="button button--secondary button--large" href="{{ url_for('transparency') }}">了解系统边界</a>
+        </div>
+        <ul class="check-list" aria-label="系统特点">
+          <li>画像陈述可修正，初始证据、置信度与冲突标记可查看</li>
+          <li>显式状态机管理数值资源，LLM 输出受结构与白名单约束</li>
+          <li>记录过程证据，不把系统编码当作能力定论</li>
+        </ul>
+      </div>
+      <div class="hero__visual" aria-label="系统流程示意">
+        <div class="flow-card flow-card--primary">
+          <span class="flow-card__step">01</span>
+          <strong>输入与画像</strong>
+          <small>背景、经历、技能、兴趣与约束</small>
+        </div>
+        <div class="flow-connector" aria-hidden="true"></div>
+        <div class="flow-card">
+          <span class="flow-card__step">02</span>
+          <strong>方向探索</strong>
+          <small>2—3 个有依据、可质疑的选项</small>
+        </div>
+        <div class="flow-connector" aria-hidden="true"></div>
+        <div class="flow-card flow-card--anchor">
+          <span class="flow-card__step">03</span>
+          <strong>动态主线 + 共锚压力测试</strong>
+          <small>状态连续，锚事件后返回主线</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="begin-title" id="begin">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">开始或继续</p>
+          <h2 id="begin-title">进入你的学习空间</h2>
+        </div>
+        <p class="section-note">不使用真实姓名。访问码仅用于返回自己的本地学习记录。</p>
+      </div>
+      <div class="split-cards">
+        <article class="panel">
+          <h3>首次使用</h3>
+          <p>创建一个去标识化别名，并阅读数据使用说明。</p>
+          <form method="post" action="{{ url_for('create_workspace') }}" class="stack-form">
+            {{ csrf_field() }}
+            <div class="field">
+              <label for="alias">学习别名</label>
+              <input id="alias" name="alias" type="text" autocomplete="nickname" maxlength="40" required
+                     value="{{ form.alias|default('') if form is defined else '' }}"
+                     aria-describedby="alias-help">
+              <p class="field-help" id="alias-help">请勿填写姓名、学号、电话、邮箱或其他可识别身份的信息。</p>
+            </div>
+            <label class="check-field">
+              <input type="checkbox" name="consent_accepted" value="1" required>
+              <span>我已阅读并理解<a href="{{ url_for('transparency') }}">系统边界与数据说明</a>，同意为本次教学模拟处理我主动提交的资料。</span>
+            </label>
+            <button class="button" type="submit">创建学习空间</button>
+          </form>
+        </article>
+
+        <article class="panel panel--muted">
+          <h3>继续已有进度</h3>
+          <p>输入创建时获得的访问码。系统不会通过邮件找回访问码。</p>
+          <form method="post" action="{{ url_for('login') }}" class="stack-form">
+            {{ csrf_field() }}
+            <div class="field">
+              <label for="resume-alias">学习别名</label>
+              <input id="resume-alias" name="alias" type="text" autocomplete="nickname" maxlength="40" required>
+            </div>
+            <div class="field">
+              <label for="access-code">访问码</label>
+              <div class="input-action">
+                <input id="access-code" name="access_code" type="password" autocomplete="current-password" required
+                       minlength="8" maxlength="128">
+                <button class="button button--quiet" type="button" data-toggle-secret data-target="access-code" aria-pressed="false">显示</button>
+              </div>
+            </div>
+            <button class="button button--secondary" type="submit">恢复主线状态</button>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="boundaries-title">
+    <div class="shell narrow">
+      <p class="eyebrow">先说清楚</p>
+      <h2 id="boundaries-title">推荐是探索起点，不是标签</h2>
+      <div class="prose-grid">
+        <p>经历与背景文本会被最小化后交给配置的 LLM API 进行结构化提取。你可以检查原文证据、修正画像，也可以拒绝推荐。</p>
+        <p>MBTI 完全可选，仅作为低权重且可能变化的自我偏好线索。系统不依据 MBTI 判定你“适合”或“不适合”某种创业。</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

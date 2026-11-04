@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import anchor_badge, process_notice with context %}
+{% set ecd_labels = {'opportunity_evaluation':'机会界定与评估','opportunity_framing':'机会界定与评估','evidence_falsifiability':'证据权衡与可证伪性','resource_financial_allocation':'资源与财务配置','resource_finance':'资源与财务配置','uncertainty_adaptation':'不确定性下的行动规划与适应更新','adaptive_action':'不确定性下的行动规划与适应更新','stakeholder_ethics_compliance':'团队、利益相关者与伦理合规','stakeholder_ethics':'团队、利益相关者与伦理合规'} %}
+{% set simulation_state_labels = {'cash':'现金','team':'团队','product':'产品','market_evidence':'市场证据','reputation':'信誉','compliance':'合规'} %}
+{% set mapping_level_labels = {'low':'低','medium':'中','high':'高'} %}
+{% set safety_flag_labels = {'none':'未返回特定风险标记（不等于已经证明安全）','financial_advice_risk':'可能涉及现实财务建议风险','legal_advice_risk':'可能涉及现实法律建议风险','privacy_risk':'可能含有隐私风险','self_harm_or_violence':'可能涉及自伤或暴力风险','discrimination_risk':'可能涉及歧视风险','prompt_injection':'检测到可能的提示注入','other':'其他需要人工检查的风险'} %}
+
+{% block title %}决策与状态历史｜VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header page-header--single">
+      <div>
+        <p class="eyebrow">可审计轨迹</p>
+        <h1>决策与状态历史</h1>
+        <p class="lede">这里显示系统实际保存的事件、回答、规则状态转移和过程证据编码；不会补造缺失事件或把反馈改写成实验结果。</p>
+      </div>
+    </header>
+
+    {{ process_notice() }}
+
+    <div class="history-toolbar">
+      <p>共 {{ history|length if history else 0 }} 条事件记录</p>
+      <a class="button button--secondary" href="{{ url_for('simulation_dashboard') }}">返回模拟总览</a>
+    </div>
+
+    {% if history %}
+      <ol class="timeline history-timeline">
+        {% for item in history %}
+          {% set event_record = item.get('event', item) %}
+          {% set event_container = event_record.get('event_json', {}) %}
+          {% set domain_event = event_container.get('domain_event', event_record.get('domain_event', {})) %}
+          {% set event = event_record.get('content', event_container.get('content', event_container if event_container else event_record)) %}
+          {% set response = item.get('response', item if item.get('response_id') else {}) %}
+          {% set response_feedback = response.get('feedback', response.get('feedback_json')) %}
+          {% set feedback = response_feedback if response_feedback is mapping else {} %}
+          {% set mapping_uncertainty = feedback.get('mapping_uncertainty', {}) %}
+          {% set safety_flags = feedback.get('safety_flags', []) %}
+          {% set transition_feedback = feedback.get('transition', {}) %}
+          {% set raw_response_evidence = response.get('evidence', response.get('evidence_json', response.get('evidence_dimensions', {}))) %}
+          {% set response_evidence = raw_response_evidence.get('evidence', raw_response_evidence) if raw_response_evidence is mapping else raw_response_evidence %}
+          <li>
+            <div class="timeline__marker" aria-hidden="true">{{ event_record.get('turn_no', event.get('turn_no', loop.index)) }}</div>
+            <article class="history-card">
+              <header class="history-card__header">
+                <div>
+                  <div class="timeline__topline">
+                    {{ anchor_badge(event_record.get('event_kind', event.get('event_kind', 'main'))) }}
+                    {% if event_record.get('created_at', event.get('created_at')) %}<time datetime="{{ event_record.get('created_at', event.get('created_at')) }}">{{ event_record.get('created_at', event.get('created_at')) }}</time>{% endif %}
+                  </div>
+                  <h2>{{ event.get('title', '创业决策事件') }}</h2>
+                </div>
+                {% if event_record.get('status', event.get('status')) %}{% set event_status = event_record.get('status', event.get('status')) %}<span class="status-badge">{{ {'completed':'已完成','pending':'待作答','cancelled':'已取消'}.get(event_status, event_status) }}</span>{% endif %}
+              </header>
+
+              {% set event_summary = event.get('summary', event.get('narrative', event.get('situation'))) %}
+              {% if event_summary %}<p class="history-card__summary">{{ event_summary }}</p>{% endif %}
+
+              {% if response %}
+                <div class="response-summary">
+                  {% if response.get('decision_text') %}<section><h3>你的决定</h3><p>{{ response.get('decision_text') }}</p></section>{% endif %}
+                  {% if response.get('rationale_text') %}<section><h3>理由</h3><p>{{ response.get('rationale_text') }}</p></section>{% endif %}
+                  {% if response.get('information_requests') %}
+                    <section><h3>请求的信息</h3><p>{{ response.get('information_requests') }}</p></section>
+                  {% endif %}
+                  {% if response.get('revision_text') %}
+                    <section><h3>修订条件</h3><p>{{ response.get('revision_text') }}</p></section>
+                  {% endif %}
+                  {% if response.get('action_code') %}
+                    {% set selected_action = namespace(label='') %}
+                    {% for action in domain_event.get('allowed_actions', []) %}
+                      {% if action is mapping and action.get('action_code') == response.get('action_code') %}{% set selected_action.label = action.get('label', '') %}{% endif %}
+                    {% endfor %}
+                    <section><h3>规则引擎采用的行动</h3><p>{% if selected_action.label %}{{ selected_action.label }} · {% endif %}<code>{{ response.get('action_code') }}</code></p></section>
+                  {% endif %}
+                </div>
+
+                {% if response.get('classification_confidence') is not none or mapping_uncertainty or safety_flags or feedback.get('state_change_notice') or transition_feedback.get('feedback_cue') or feedback.get('interpretation_boundary') %}
+                  <section class="mapping-audit" aria-labelledby="mapping-audit-title-{{ loop.index }}">
+                    <h3 id="mapping-audit-title-{{ loop.index }}">行动映射与规则反馈（未经校准）</h3>
+                    <p class="small muted">开放回答由 LLM 映射到白名单行动代码。模型自报把握和不确定性尚未经经验校准，不能解释为映射正确概率、能力分数或现实结果预测。</p>
+                    <dl class="mapping-audit__list">
+                      {% if response.get('classification_confidence') is not none %}
+                        <div><dt>模型自报分类把握</dt><dd>{{ (response.get('classification_confidence') * 100)|round|int }}%（未校准，不是正确率）</dd></div>
+                      {% endif %}
+                      {% if mapping_uncertainty %}
+                        <div><dt>映射不确定性</dt><dd>{{ mapping_level_labels.get(mapping_uncertainty.get('level'), mapping_uncertainty.get('level', '未说明')) }}</dd></div>
+                        {% if mapping_uncertainty.get('explanation') %}<div><dt>模型给出的映射说明</dt><dd>{{ mapping_uncertainty.get('explanation') }}</dd></div>{% endif %}
+                        {% if mapping_uncertainty.get('alternative_action_codes') %}<div><dt>可能的替代行动代码</dt><dd>{% for code in mapping_uncertainty.get('alternative_action_codes') %}<code>{{ code }}</code>{% if not loop.last %}、{% endif %}{% endfor %}</dd></div>{% endif %}
+                      {% endif %}
+                      {% if safety_flags %}
+                        <div><dt>自动安全标记</dt><dd>{% for flag in safety_flags %}{{ safety_flag_labels.get(flag, flag) }}{% if not loop.last %}；{% endif %}{% endfor %}</dd></div>
+                      {% endif %}
+                    </dl>
+                    {% if feedback.get('state_change_notice') %}<p><strong>状态更新边界：</strong>{{ feedback.get('state_change_notice') }}</p>{% endif %}
+                    {% if transition_feedback.get('feedback_cue') %}<p><strong>规则蓝图反馈提示：</strong>{{ transition_feedback.get('feedback_cue') }}</p>{% endif %}
+                    {% if feedback.get('interpretation_boundary') %}<p class="muted"><strong>解释边界：</strong>{{ feedback.get('interpretation_boundary') }}</p>{% endif %}
+                  </section>
+                {% endif %}
+
+                {% if response_feedback %}
+                  <details class="history-details">
+                    <summary>查看系统生成的反思反馈</summary>
+                    {% if response_feedback is mapping %}
+                      {% if feedback.get('summary') %}<p>{{ feedback.get('summary') }}</p>{% endif %}
+                      {% if feedback.get('strengths') %}<h3>回答中已呈现的证据</h3><ul>{% for item in feedback.get('strengths') %}<li>{{ item }}</li>{% endfor %}</ul>{% endif %}
+                      {% set questions = feedback.get('reflection_questions', feedback.get('questions', [])) %}
+                      {% if questions %}<h3>反思问题</h3><ul>{% for question in questions %}<li>{{ question }}</li>{% endfor %}</ul>{% endif %}
+                      {% if feedback.get('next_step') %}<p><strong>下一步：</strong>{{ feedback.get('next_step') }}</p>{% endif %}
+                      {% if feedback.get('limitations') %}<p class="muted"><strong>反馈限制：</strong>{{ feedback.get('limitations') }}</p>{% endif %}
+                      {% if feedback.get('caveat') %}<p class="muted">{{ feedback.get('caveat') }}</p>{% endif %}
+                    {% else %}<p>{{ response_feedback }}</p>{% endif %}
+                  </details>
+                {% endif %}
+
+                {% set evidence = response_evidence %}
+                {% if evidence %}
+                  <details class="history-details evidence-details">
+                    <summary>查看五维过程证据编码（待验证）</summary>
+                    <p class="small muted">这些条目是自动提取的过程线索，不是能力分数或结论。</p>
+                    <div class="dimension-grid">
+                      {% if evidence is mapping %}
+                        {% for key, dimension in evidence.items() %}
+                          <article>
+                            <h3>{{ dimension.get('label', ecd_labels.get(key, key)) if dimension is mapping else ecd_labels.get(key, key) }}</h3>
+                            <p>{{ dimension.get('evidence', dimension.get('note', '未提取到明确证据')) if dimension is mapping else dimension }}</p>
+                          </article>
+                        {% endfor %}
+                      {% else %}
+                        {% for dimension in evidence %}
+                          <article>
+                            {% set dimension_key = dimension.get('dimension', '') if dimension is mapping else '' %}
+                            <h3>{{ dimension.get('label', ecd_labels.get(dimension_key, dimension_key or '过程维度')) if dimension is mapping else '过程维度' }}</h3>
+                            {% if dimension is mapping and dimension.get('score') is not none %}<p class="evidence-code">文本证据编码：{{ dimension.get('score') }} / 4（待验证）</p>{% endif %}
+                            <p>{{ dimension.get('evidence', dimension.get('rationale', dimension.get('note', '未提取到明确证据'))) if dimension is mapping else dimension }}</p>
+                            {% if dimension is mapping and dimension.get('quotes') %}<blockquote>“{{ dimension.get('quotes')|join('” “') }}”</blockquote>{% endif %}
+                          </article>
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </details>
+                {% endif %}
+
+                {% if event_record.get('event_kind', event.get('event_kind')) in ['exact_anchor', 'surface_anchor'] %}
+                  <p class="restore-line"><strong>主线恢复：</strong>{{ item.get('restore_note', '本锚事件在隔离状态中完成；个性化主线按进入前状态继续。') }}</p>
+                  {% set sandbox_before = response.get('visible_state_json', domain_event.get('visible_state', {})) %}
+                  {% set sandbox_after = response.get('sandbox_state_after_json', transition_feedback.get('sandbox_state_after', {})) %}
+                  {% if sandbox_before and sandbox_after %}
+                    <details class="history-details">
+                      <summary>查看锚事件沙盒状态变更</summary>
+                      <p class="small muted">这些变化只属于本次隔离压力测试，不会覆盖个性化主线。</p>
+                      <dl class="change-list">
+                        {% for key, before_value in sandbox_before.items() %}
+                          {% if key in sandbox_after %}<div><dt>{{ simulation_state_labels.get(key, key) }}</dt><dd>{{ before_value }} → {{ sandbox_after.get(key) }}</dd></div>{% endif %}
+                        {% endfor %}
+                      </dl>
+                    </details>
+                  {% endif %}
+                {% elif response.get('state_changes') %}
+                  <details class="history-details">
+                    <summary>查看规则状态变更</summary>
+                    <dl class="change-list">
+                      {% for change in response.get('state_changes') %}
+                        <div><dt>{{ change.get('label', change.get('key', '状态')) }}</dt><dd>{{ change.get('before', '—') }} → {{ change.get('after', '—') }}</dd></div>
+                      {% endfor %}
+                    </dl>
+                  </details>
+                {% endif %}
+              {% else %}
+                <p class="empty-state">该事件尚无已保存回答。</p>
+              {% endif %}
+            </article>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <section class="panel empty-panel">
+        <h2>还没有事件记录</h2>
+        <p>开始并提交第一个创业决策后，事件蓝图、投放类型、状态与回答会按时间出现在这里。</p>
+        <a class="button" href="{{ url_for('simulation_dashboard') }}">前往模拟总览</a>
+      </section>
+    {% endif %}
+  </div>
+{% endblock %}

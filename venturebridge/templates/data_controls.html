@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% from '_macros.html' import csrf_field with context %}
+{% set u = current_user if current_user is defined else (g.user if g is defined and g.user else {}) %}
+{% set shown_workspace_id = workspace_id if workspace_id is defined else (u.get('id') if u is mapping else none) %}
+{% set shown_created_at = created_at if created_at is defined else (u.get('created_at') if u is mapping else none) %}
+{% set shown_updated_at = storage_updated_at if storage_updated_at is defined else (u.get('updated_at') if u is mapping else none) %}
+{% set inventory = data_inventory|default([]) %}
+
+{% block title %}我的数据与控制权｜VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell page-shell">
+    <header class="page-header page-header--single">
+      <div>
+        <p class="eyebrow">数据控制</p>
+        <h1>查看、更正或删除你的数据</h1>
+        <p class="lede">系统以学习空间标识关联记录，不要求真实姓名。你可以检查当前保存了什么，并在此结束整个学习空间。</p>
+      </div>
+    </header>
+
+    <div class="data-layout">
+      <div class="data-main">
+        <section class="panel" aria-labelledby="identity-title">
+          <div class="section-heading section-heading--compact">
+            <div><p class="eyebrow">学习空间</p><h2 id="identity-title">当前身份信息</h2></div>
+          </div>
+          <dl class="data-list">
+            <div><dt>学习别名</dt><dd>{{ u.get('alias', user_alias|default('未提供')) if u is mapping else user_alias|default('未提供') }}</dd></div>
+            {% if shown_workspace_id %}<div><dt>空间标识</dt><dd><code>{{ shown_workspace_id }}</code></dd></div>{% endif %}
+            {% if shown_created_at %}<div><dt>创建时间</dt><dd>{{ shown_created_at }}</dd></div>{% endif %}
+          </dl>
+          <p class="small muted">访问码只保存为不可逆摘要，页面和日志不会显示原访问码。若遗失，需要创建新的学习空间。</p>
+        </section>
+
+        <section class="panel" aria-labelledby="inventory-title">
+          <div class="section-heading section-heading--compact">
+            <div><p class="eyebrow">数据清单</p><h2 id="inventory-title">{{ '当前保存的记录' if inventory else '本系统保存的记录类别' }}</h2></div>
+            {% if shown_updated_at %}<p class="section-note">学习空间更新于 {{ shown_updated_at }}</p>{% endif %}
+          </div>
+          {% if inventory %}
+            <div class="inventory-grid">
+              {% for item in inventory %}
+                <article>
+                  <span class="inventory-grid__count">{{ item.get('count', 0) }}</span>
+                  <h3>{{ item.get('label', '记录') }}</h3>
+                  {% if item.get('description') %}<p>{{ item.get('description') }}</p>{% endif %}
+                  {% if item.get('url') %}<a href="{{ item.get('url') }}">查看或更正</a>{% endif %}
+                </article>
+              {% endfor %}
+            </div>
+          {% else %}
+            <ul class="data-categories">
+              <li><strong>资料与画像</strong><span>你提交的去标识化资料、画像版本及修正说明</span></li>
+              <li><strong>推荐</strong><span>生成的方向、依据、不确定性与所选方向</span></li>
+              <li><strong>模拟轨迹</strong><span>事件、投放元数据、回答、状态转移与反馈</span></li>
+              <li><strong>过程编码记录</strong><span>未经校准的五维文本证据、评分者与模型版本标识</span></li>
+              <li><strong>系统审计</strong><span>提示词/模型版本、调用状态、输入摘要哈希及经结构校验的模型输出</span></li>
+            </ul>
+          {% endif %}
+          <div class="button-row button-row--start">
+            <a class="button button--secondary" href="{{ url_for('profile_review') }}">查看和更正画像</a>
+            <a class="button button--secondary" href="{{ url_for('simulation_history') }}">查看模拟轨迹</a>
+            <a class="button button--secondary" href="{{ url_for('export_data') }}">导出我的 JSON 数据</a>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="api-data-title">
+          <p class="eyebrow">LLM API</p>
+          <h2 id="api-data-title">哪些内容会发送给模型服务</h2>
+          <p>仅在生成画像、推荐、事件叙事、反馈或过程证据编码时，发送完成当前任务所需的最小化内容。应用不会把 API 密钥、访问码或内部数据库标识放入提示词。</p>
+          <ul class="plain-list">
+            <li>画像阶段：去标识化的背景与经历文本，以及结构化偏好字段</li>
+            <li>事件阶段：必要的画像摘要、当前可见状态、历史决策摘要和受控蓝图</li>
+            <li>反馈阶段：本次事件内容与学习者主动提交的回答</li>
+          </ul>
+          <p class="small muted">实际 API 供应商及其数据处理规则由部署者配置。使用前应由教学机构完成相应的数据保护审查。</p>
+        </section>
+      </div>
+
+      <aside class="data-side">
+        <section class="panel control-summary">
+          <h2>你的控制权</h2>
+          <ol>
+            <li><span>1</span><div><strong>查看</strong><p>追溯画像证据、推荐依据和事件历史。</p></div></li>
+            <li><span>2</span><div><strong>更正</strong><p>创建新的画像版本，修正 LLM 误读或过时信息。</p></div></li>
+            <li><span>3</span><div><strong>删除</strong><p>删除学习空间及其关联记录。</p></div></li>
+          </ol>
+        </section>
+        <section class="notice notice--warning">
+          <strong>请避免二次暴露</strong>
+          <p>查看历史时不要把页面截图转发给无关人员。若发现提交内容包含身份信息，请先更正或删除。</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="panel panel--danger delete-zone" aria-labelledby="delete-title">
+      <div>
+        <p class="eyebrow">危险操作</p>
+        <h2 id="delete-title">删除整个学习空间</h2>
+        <p>该操作会删除画像、推荐、模拟、回答及其关联记录，并退出当前会话。删除后的本地数据无法通过本系统恢复；部署方依法必须保留的独立安全日志不在此承诺范围内，应以机构说明为准。</p>
+      </div>
+      <form method="post" action="{{ url_for('delete_data') }}" class="delete-form">
+        {{ csrf_field() }}
+        <div class="field">
+          <label for="delete-confirmation">输入“删除全部数据”以确认</label>
+          <input id="delete-confirmation" name="confirmation" type="text" required
+                 pattern="删除全部数据" autocomplete="off">
+        </div>
+        <label class="check-field">
+          <input type="checkbox" name="understand_irreversible" value="1" required>
+          <span>我理解删除后无法从本系统恢复这些记录。</span>
+        </label>
+        <button class="button button--danger" type="submit"
+                data-confirm-message="确定删除整个学习空间及其关联记录吗？此操作无法撤销。"
+                data-submit-label="正在删除…">永久删除学习空间</button>
+      </form>
+    </section>
+  </div>
+{% endblock %}

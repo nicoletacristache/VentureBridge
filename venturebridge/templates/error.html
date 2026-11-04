@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% set shown_status = status_code|default(status|default('!')) %}
+{% set status_titles = {400:'请求无法处理',403:'无权访问此页面',404:'页面不存在',405:'不支持此操作方式',413:'提交内容过大',500:'服务暂时出错'} %}
+{% set status_messages = {400:'提交的请求无法安全处理，请检查输入后重试。',403:'当前学习空间无权访问此内容。',404:'找不到请求的页面；它可能已移动，或该记录不属于当前学习空间。',405:'当前页面不接受这种操作方式，请从页面中的按钮或链接重新进入。',413:'提交内容超过系统允许的大小，请删除不必要内容后重试。',500:'服务器无法完成请求；错误详情已隐藏，避免暴露学习者数据。'} %}
+{% set shown_title = error_title|default(title|default(status_titles.get(shown_status, '暂时无法完成操作'))) %}
+{% set supplied_message = error_message|default(message|default('')) %}
+{% set shown_message = status_messages.get(shown_status) if (not supplied_message or supplied_message.startswith('The ')) and shown_status in status_messages else (supplied_message or '请求未能安全完成。你的已保存主线状态不会因这个页面而被修改。') %}
+
+{% block title %}{{ shown_title }}｜VentureBridge{% endblock %}
+
+{% block content %}
+  <div class="shell error-page">
+    <div class="error-page__code" aria-hidden="true">{{ shown_status }}</div>
+    <div>
+      <p class="eyebrow">系统提示</p>
+      <h1>{{ shown_title }}</h1>
+      <p class="lede">{{ shown_message }}</p>
+      {% if recovery_steps %}
+        <h2>可以尝试</h2>
+        <ul>
+          {% for step in recovery_steps %}<li>{{ step }}</li>{% endfor %}
+        </ul>
+      {% else %}
+        <ul>
+          <li>返回上一页检查输入，再提交一次。</li>
+          <li>若是 LLM API 暂时不可用，请稍后重试；系统不会用静态结果冒充成功响应。</li>
+          <li>问题持续时，向系统维护者提供下方请求标识，不要发送访问码或个人资料。</li>
+        </ul>
+      {% endif %}
+      {% if request_id %}<p class="request-id">请求标识：<code>{{ request_id }}</code></p>{% endif %}
+      <div class="button-row button-row--start">
+        <a class="button" href="{{ back_url|default(url_for('home')) }}">{{ back_label|default('返回安全页面') }}</a>
+        <a class="button button--secondary" href="{{ url_for('transparency') }}#limitations">查看系统边界</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
