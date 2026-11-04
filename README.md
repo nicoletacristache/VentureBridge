@@ -93,9 +93,6 @@ Basic checks
   node --check venturebridge/static/app.js
   python -m flask --app wsgi:app verify-audit
 
-The exported package intentionally excludes credentials, hidden development
-files, caches, generated databases, research materials, tests, logs, and Codex
-workflow artifacts.
 
 
 中文
@@ -184,5 +181,3 @@ ANCHOR_PLAN_EXPECTED_HASH，之后才能正式投放模拟。
   node --check venturebridge/static/app.js
   python -m flask --app wsgi:app verify-audit
 
-本交付目录已排除密钥、隐藏的开发文件、缓存、生成的数据库、研究材料、测试、
-日志以及 Codex 工作流产物。
