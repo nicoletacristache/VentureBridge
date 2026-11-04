@@ -1,0 +1,128 @@
+{
+  "case_type_metrics": [
+    {
+      "accuracy": 0.28125,
+      "case_type": "common",
+      "errors_over_one": 56,
+      "macro_f1": 0.2825476379136942,
+      "mae": 1.08,
+      "method": "rule",
+      "method_label": "ECD关键词/结构规则",
+      "n": 175,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.6789772727272727
+    },
+    {
+      "accuracy": 0.3223684210526316,
+      "case_type": "boundary",
+      "errors_over_one": 27,
+      "macro_f1": 0.4144843240175911,
+      "mae": 1.48,
+      "method": "rule",
+      "method_label": "ECD关键词/结构规则",
+      "n": 75,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.6381578947368421
+    },
+    {
+      "accuracy": 0.049019607843137254,
+      "case_type": "noisy",
+      "errors_over_one": 32,
+      "macro_f1": 0.08106893106893107,
+      "mae": 1.96,
+      "method": "rule",
+      "method_label": "ECD关键词/结构规则",
+      "n": 50,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.3627450980392157
+    },
+    {
+      "accuracy": 0.7698863636363636,
+      "case_type": "common",
+      "errors_over_one": 9,
+      "macro_f1": 0.7560047450544026,
+      "mae": 0.28,
+      "method": "llm",
+      "method_label": "VentureBridge结构化ECD编码（终止失败时规则回退）",
+      "n": 175,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.9460227272727273
+    },
+    {
+      "accuracy": 0.7828947368421053,
+      "case_type": "boundary",
+      "errors_over_one": 2,
+      "macro_f1": 0.7654928939203133,
+      "mae": 0.26666666666666666,
+      "method": "llm",
+      "method_label": "VentureBridge结构化ECD编码（终止失败时规则回退）",
+      "n": 75,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.9671052631578947
+    },
+    {
+      "accuracy": 0.7745098039215687,
+      "case_type": "noisy",
+      "errors_over_one": 3,
+      "macro_f1": 0.7488976709564945,
+      "mae": 0.3,
+      "method": "llm",
+      "method_label": "VentureBridge结构化ECD编码（终止失败时规则回退）",
+      "n": 50,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.9313725490196079
+    }
+  ],
+  "llm_terminal_failure_policy": "deterministic_same_item_rule_fallback_v1",
+  "llm_terminal_failures": 18,
+  "methods": [
+    "llm",
+    "rule"
+  ],
+  "n_items": 300,
+  "paired_bootstrap": [
+    {
+      "accuracy_increase": 0.5266666666666666,
+      "accuracy_increase_ci_high": 0.59,
+      "accuracy_increase_ci_low": 0.46,
+      "bootstrap_replicates": 2000,
+      "contrast": "llm_minus_rule",
+      "mae_reduction": 1.0466666666666666,
+      "mae_reduction_ci_high": 1.1767499999999995,
+      "mae_reduction_ci_low": 0.91,
+      "n_items": 300
+    }
+  ],
+  "pooled_metrics": [
+    {
+      "accuracy": 0.7757475083056479,
+      "balanced_accuracy": 0.7721311475409836,
+      "dimension": "ALL",
+      "exact_agreement": 0.7757475083056479,
+      "macro_f1": 0.7669234807172624,
+      "mae": 0.28,
+      "method": "llm",
+      "method_label": "VentureBridge结构化ECD编码（终止失败时规则回退）",
+      "n": 300,
+      "quadratic_weighted_kappa": 0.9018691588785047,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.9518272425249169
+    },
+    {
+      "accuracy": 0.25083056478405313,
+      "balanced_accuracy": 0.2540983606557377,
+      "dimension": "ALL",
+      "exact_agreement": 0.25083056478405313,
+      "macro_f1": 0.20659968778151505,
+      "mae": 1.3266666666666667,
+      "method": "rule",
+      "method_label": "ECD关键词/结构规则",
+      "n": 300,
+      "quadratic_weighted_kappa": 0.16387337057728124,
+      "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+      "within_one_agreement": 0.6162790697674418
+    }
+  ],
+  "rate_estimator": "jeffreys_posterior_mean_beta_0.5_0.5",
+  "status": "completed"
+}

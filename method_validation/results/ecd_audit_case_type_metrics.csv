@@ -1,0 +1,7 @@
+method,method_label,case_type,n,accuracy,macro_f1,mae,within_one_agreement,errors_over_one,rate_estimator
+rule,ECD关键词/结构规则,common,175,0.28125,0.2825476379136942,1.08,0.6789772727272727,56,jeffreys_posterior_mean_beta_0.5_0.5
+rule,ECD关键词/结构规则,boundary,75,0.3223684210526316,0.4144843240175911,1.48,0.6381578947368421,27,jeffreys_posterior_mean_beta_0.5_0.5
+rule,ECD关键词/结构规则,noisy,50,0.049019607843137254,0.08106893106893107,1.96,0.3627450980392157,32,jeffreys_posterior_mean_beta_0.5_0.5
+llm,VentureBridge结构化ECD编码（终止失败时规则回退）,common,175,0.7698863636363636,0.7560047450544026,0.28,0.9460227272727273,9,jeffreys_posterior_mean_beta_0.5_0.5
+llm,VentureBridge结构化ECD编码（终止失败时规则回退）,boundary,75,0.7828947368421053,0.7654928939203133,0.26666666666666666,0.9671052631578947,2,jeffreys_posterior_mean_beta_0.5_0.5
+llm,VentureBridge结构化ECD编码（终止失败时规则回退）,noisy,50,0.7745098039215687,0.7488976709564945,0.3,0.9313725490196079,3,jeffreys_posterior_mean_beta_0.5_0.5
